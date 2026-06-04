@@ -1,0 +1,1377 @@
+<!DOCTYPE html>
+
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tori Tori × Rappi — Business Review Premium</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap');
+
+  :root {
+    --rappi-red: #FF441F;
+    --rappi-orange: #FF6B35;
+    --ink: #111112;
+    --ink-2: #1C1B1A;
+    --carbon: #24211F;
+    --paper: #F8F3EA;
+    --paper-2: #FFF9EF;
+    --card: rgba(255, 249, 239, 0.92);
+    --card-solid: #FFF8EC;
+    --line: rgba(32, 25, 16, 0.12);
+    --muted: #70675C;
+    --gold: #B88A44;
+    --gold-soft: #E8D4AC;
+    --green: #058768;
+    --red: #C9402D;
+    --yellow: #B8870B;
+    --blue: #2D6DA6;
+    --purple: #7750A9;
+    --shadow: 0 18px 60px rgba(31, 20, 7, 0.12);
+    --shadow-soft: 0 10px 28px rgba(31, 20, 7, 0.08);
+    --radius: 22px;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    min-height: 100vh;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(255, 68, 31, 0.12), transparent 34%),
+      radial-gradient(circle at 95% 8%, rgba(184, 138, 68, 0.18), transparent 32%),
+      linear-gradient(135deg, #100F0E 0%, #1B1714 35%, #F8F3EA 35.1%, #F8F3EA 100%);
+    color: var(--ink);
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    line-height: 1.62;
+    padding-bottom: 28px;
+  }
+
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.32;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+    background-size: 42px 42px;
+    mix-blend-mode: overlay;
+    z-index: 0;
+  }
+
+  body > * { position: relative; z-index: 1; }
+
+  /* ─── HEADER ─── */
+  header {
+    max-width: 1540px;
+    margin: 28px auto 0;
+    padding: 42px 48px 36px;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(255,255,255,0.10);
+    border-radius: 30px 30px 0 0;
+    background:
+      linear-gradient(135deg, rgba(16,15,14,0.98) 0%, rgba(32,25,20,0.96) 60%, rgba(255,68,31,0.22) 100%),
+      radial-gradient(circle at 76% 26%, rgba(232,212,172,0.20), transparent 34%);
+    color: var(--paper-2);
+    box-shadow: var(--shadow);
+  }
+
+  header::before {
+    content: '鳥';
+    position: absolute;
+    right: 36px;
+    top: -35px;
+    font-family: 'Playfair Display', serif;
+    font-size: 260px;
+    line-height: 1;
+    color: rgba(255,255,255,0.035);
+    pointer-events: none;
+  }
+
+  header::after {
+    content: '';
+    position: absolute;
+    left: 48px;
+    right: 48px;
+    bottom: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(232,212,172,0.7), transparent);
+  }
+
+  .header-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .brand-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 249, 239, 0.09);
+    border: 1px solid rgba(232,212,172,0.30);
+    padding: 8px 15px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 800;
+    color: #F1D7A5;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    margin-bottom: 16px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.08);
+  }
+
+  .brand-badge::before {
+    content: '●';
+    color: var(--rappi-red);
+    font-size: 12px;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(42px, 5vw, 74px);
+    font-weight: 800;
+    line-height: 0.96;
+    letter-spacing: -0.035em;
+  }
+
+  h1 span { color: var(--rappi-red); font-family: 'Manrope', sans-serif; font-weight: 800; }
+
+  .header-meta {
+    max-width: 820px;
+    font-size: 14px;
+    color: rgba(255,249,239,0.72);
+    margin-top: 16px;
+  }
+
+  .date-badge {
+    min-width: 230px;
+    background: rgba(255,249,239,0.08);
+    border: 1px solid rgba(232,212,172,0.26);
+    padding: 14px 18px;
+    border-radius: 18px;
+    font-size: 12px;
+    color: rgba(255,249,239,0.66);
+    white-space: nowrap;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.09);
+    backdrop-filter: blur(12px);
+  }
+  .date-badge strong { color: var(--paper-2); display: block; font-size: 14px; margin-bottom: 2px; }
+
+  /* ─── ALERT BANNER ─── */
+  .alert-banner {
+    max-width: 1540px;
+    margin: 0 auto;
+    background: linear-gradient(90deg, rgba(255,68,31,0.11), rgba(255,249,239,0.92));
+    border: 1px solid rgba(255,68,31,0.20);
+    border-top: none;
+    padding: 17px 24px;
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    font-size: 13px;
+    color: #63311F;
+    box-shadow: var(--shadow-soft);
+    border-radius: 0 0 30px 30px;
+  }
+  .alert-banner strong { color: #33170E; }
+  .alert-icon {
+    width: 32px; height: 32px;
+    display: inline-flex; align-items: center; justify-content: center;
+    border-radius: 999px;
+    background: rgba(255,68,31,0.12);
+    font-size: 16px;
+    flex: 0 0 auto;
+  }
+
+  /* ─── MAIN LAYOUT ─── */
+  main {
+    padding: 36px 34px 20px;
+    max-width: 1540px;
+    margin: 0 auto;
+  }
+
+  /* ─── SECTION HEADERS ─── */
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 18px;
+    margin-top: 46px;
+  }
+  .section-header:first-child { margin-top: 0; }
+  .section-num {
+    width: 31px; height: 31px;
+    background: linear-gradient(135deg, var(--ink) 0%, #3A2720 100%);
+    color: var(--paper-2);
+    border: 1px solid rgba(184,138,68,0.32);
+    border-radius: 10px;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900;
+    font-size: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 8px 18px rgba(17,17,18,0.12);
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--ink);
+    font-size: 26px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+  }
+  .section-header p {
+    font-size: 12px;
+    color: var(--muted);
+    margin-left: auto;
+    text-align: right;
+  }
+
+  /* ─── KPI GRID ─── */
+  .kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 14px;
+    margin-bottom: 10px;
+  }
+  @media (max-width: 1260px) { .kpi-grid { grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 720px) { .kpi-grid { grid-template-columns: 1fr; } }
+
+  .kpi-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 20px;
+    padding: 18px 16px 16px;
+    position: relative;
+    overflow: hidden;
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    box-shadow: var(--shadow-soft);
+  }
+  .kpi-card:hover { transform: translateY(-3px); border-color: rgba(184,138,68,0.34); box-shadow: var(--shadow); }
+  .kpi-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle at 90% 0%, color-mix(in srgb, var(--accent, var(--rappi-red)) 20%, transparent), transparent 38%);
+    opacity: .65;
+    pointer-events: none;
+  }
+  .kpi-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background: var(--accent, var(--rappi-red));
+  }
+  .kpi-label, .kpi-value, .kpi-delta, .kpi-sub { position: relative; z-index: 1; }
+  .kpi-label {
+    font-size: 10.5px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+    font-weight: 800;
+  }
+  .kpi-value {
+    font-size: 28px;
+    font-weight: 900;
+    line-height: 1;
+    letter-spacing: -0.05em;
+    margin-bottom: 8px;
+    color: var(--ink);
+  }
+  .kpi-delta {
+    font-size: 12px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .kpi-delta.pos { color: var(--green); }
+  .kpi-delta.neg { color: var(--red); }
+  .kpi-delta.warn { color: var(--yellow); }
+  .kpi-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* ─── CHART CARDS ─── */
+  .chart-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  .chart-grid-3 {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 18px;
+    margin-bottom: 18px;
+  }
+  @media (max-width: 1100px) { .chart-grid-2, .chart-grid-3 { grid-template-columns: 1fr; } }
+
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 22px;
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+    position: relative;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 22px; right: 22px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(184,138,68,0.34), transparent);
+  }
+  .card-title {
+    font-size: 14px;
+    font-weight: 900;
+    margin-bottom: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .card-title span { color: var(--muted) !important; }
+  .card-subtitle { font-size: 12px; color: var(--muted); margin-bottom: 16px; }
+  .chart-wrap { position: relative; height: 214px; }
+  .chart-wrap.tall { height: 290px; }
+
+  /* ─── TABLES ─── */
+  .diag-table, .store-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    font-size: 13px;
+  }
+  .diag-table th, .store-table th {
+    font-size: 10.5px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.07em;
+    color: var(--muted);
+    text-align: left;
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--line);
+    background: rgba(17,17,18,0.035);
+  }
+  .diag-table td, .store-table td {
+    padding: 12px;
+    border-bottom: 1px solid rgba(32,25,16,0.08);
+    vertical-align: top;
+    color: #2A2520;
+  }
+  .diag-table tr:last-child td, .store-table tr:last-child td { border-bottom: none; }
+  .diag-table tr:hover td, .store-table tr:hover td { background: rgba(184,138,68,0.055); }
+
+  .store-table { font-size: 12.5px; }
+  .store-table th { text-align: right; white-space: nowrap; }
+  .store-table th:first-child { text-align: left; }
+  .store-table td { text-align: right; font-variant-numeric: tabular-nums; }
+  .store-table td:first-child { text-align: left; font-weight: 800; }
+
+  .badge {
+    display: inline-block;
+    padding: 4px 9px;
+    border-radius: 999px;
+    font-size: 10.5px;
+    font-weight: 900;
+    white-space: nowrap;
+    border: 1px solid currentColor;
+  }
+  .badge-green { background: rgba(5,135,104,0.10); color: var(--green); }
+  .badge-yellow { background: rgba(184,135,11,0.12); color: var(--yellow); }
+  .badge-red { background: rgba(201,64,45,0.11); color: var(--red); }
+  .badge-blue { background: rgba(45,109,166,0.10); color: var(--blue); }
+
+  .dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+  .dot-green { background: var(--green); }
+  .dot-red { background: var(--red); }
+  .dot-yellow { background: var(--yellow); }
+
+  /* ─── PILLARS ─── */
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+  }
+  @media (max-width: 1000px) { .pillars-grid { grid-template-columns: 1fr; } }
+
+  .pillar-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow-soft);
+  }
+  .pillar-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 17px;
+  }
+  .pillar-icon {
+    width: 44px; height: 44px;
+    border-radius: 15px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 19px;
+    flex-shrink: 0;
+    border: 1px solid rgba(32,25,16,0.08);
+  }
+  .pillar-title {
+    font-family: 'Playfair Display', serif;
+    font-weight: 800;
+    font-size: 20px;
+    color: var(--ink);
+    line-height: 1.1;
+  }
+  .pillar-subtitle { font-size: 12px; color: var(--muted); margin-top: 3px; }
+
+  .lever-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .lever-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 11px;
+    padding: 13px 14px;
+    background: rgba(17,17,18,0.035);
+    border-radius: 14px;
+    font-size: 13px;
+    border: 1px solid rgba(32,25,16,0.07);
+    border-left: 4px solid transparent;
+  }
+  .lever-item.high { border-left-color: var(--green); }
+  .lever-item.med { border-left-color: var(--yellow); }
+  .lever-item.low { border-left-color: var(--blue); }
+  .lever-icon { font-size: 16px; margin-top: 1px; flex-shrink: 0; }
+  .lever-text strong { display: block; margin-bottom: 3px; color: var(--ink); }
+  .lever-text span { color: var(--muted); font-size: 12px; }
+
+  /* ─── ROADMAP ─── */
+  .roadmap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 1050px) { .roadmap { grid-template-columns: 1fr; } }
+
+  .roadmap-col {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-soft);
+  }
+  .roadmap-col-header {
+    padding: 14px 18px;
+    font-size: 12px;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .roadmap-col-header.now { background: linear-gradient(90deg, rgba(255,68,31,0.16), rgba(255,68,31,0.05)); color: #9D301A; }
+  .roadmap-col-header.soon { background: linear-gradient(90deg, rgba(184,135,11,0.16), rgba(184,135,11,0.05)); color: var(--yellow); }
+  .roadmap-col-header.later { background: linear-gradient(90deg, rgba(45,109,166,0.14), rgba(45,109,166,0.05)); color: var(--blue); }
+  .roadmap-items { padding: 14px; display: flex; flex-direction: column; gap: 10px; }
+  .roadmap-item {
+    background: rgba(17,17,18,0.035);
+    border: 1px solid rgba(32,25,16,0.07);
+    border-radius: 14px;
+    padding: 13px 14px;
+    font-size: 12.5px;
+  }
+  .roadmap-item strong { display: block; margin-bottom: 4px; font-size: 13px; color: var(--ink); }
+  .roadmap-item span { color: var(--muted); font-size: 11.5px; }
+
+  /* ─── FOOTER ─── */
+  footer {
+    max-width: 1540px;
+    margin: 26px auto 0;
+    padding: 18px 34px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    font-size: 11.5px;
+    color: rgba(255,249,239,0.64);
+    background: rgba(17,17,18,0.96);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 22px;
+  }
+
+  /* ─── INSIGHT BOX ─── */
+  .insight-box {
+    background: linear-gradient(135deg, rgba(17,17,18,0.95), rgba(42,31,24,0.95));
+    border: 1px solid rgba(232,212,172,0.24);
+    border-radius: 22px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+    font-size: 13.5px;
+    color: rgba(255,249,239,0.88);
+    box-shadow: var(--shadow-soft);
+  }
+  .insight-box strong { color: #F1D7A5; font-family: 'Manrope', sans-serif; font-weight: 900; }
+  .insight-box p { color: rgba(255,249,239,0.76); margin-top: 6px; line-height: 1.75; }
+  .insight-box p strong { color: #fff3d7; }
+
+  .executive-strip {
+    display: grid;
+    grid-template-columns: 1.25fr 1fr 1fr;
+    gap: 16px;
+    margin: 0 0 30px;
+  }
+  .executive-card {
+    background: rgba(17,17,18,0.96);
+    color: var(--paper-2);
+    border: 1px solid rgba(232,212,172,0.18);
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: var(--shadow-soft);
+    min-height: 142px;
+  }
+  .executive-card.light {
+    background: var(--card);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+  .executive-kicker {
+    font-size: 10.5px;
+    text-transform: uppercase;
+    letter-spacing: 0.10em;
+    color: var(--gold);
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+  .executive-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    margin-bottom: 10px;
+  }
+  .executive-card p { color: rgba(255,249,239,0.70); font-size: 12.5px; }
+  .executive-card.light p { color: var(--muted); }
+  @media (max-width: 980px) { .executive-strip { grid-template-columns: 1fr; } }
+
+  @media (max-width: 780px) {
+    body { background: var(--paper); }
+    header { margin: 0; border-radius: 0; padding: 32px 22px; }
+    .alert-banner { border-radius: 0; }
+    main { padding: 26px 16px; }
+    .section-header { align-items: flex-start; flex-wrap: wrap; }
+    .section-header p { width: 100%; margin-left: 43px; text-align: left; }
+    footer { border-radius: 0; flex-direction: column; }
+  }
+</style>
+</head>
+<body>
+<!-- HEADER -->
+<header>
+<div class="header-top">
+<div>
+<div class="brand-badge">Análisis de Cuenta · Rappi MX</div>
+<h1>Tori Tori <span>×</span> Rappi</h1>
+<p class="header-meta">Diagnóstico comercial y variables de palanca para cambio de tendencia · 12 tiendas · CDMX</p>
+</div>
+<div class="date-badge">
+<strong>Mayo 2026 (cierre)</strong>
+      Periodo analizado: May 2025 — May 2026
+    </div>
+</div>
+</header>
+<div class="alert-banner">
+<span class="alert-icon">⚠️</span>
+<span><strong>Señal de alerta:</strong> Mayo 2026 registra caída de -19.9% en órdenes y -13.3% en venta vs Abril 2026 — revertir esta tendencia es la prioridad de la cuenta.</span>
+</div>
+<main>
+<section class="executive-strip">
+<div class="executive-card">
+<div class="executive-kicker">Resumen ejecutivo</div>
+<h3>La cuenta crece vs 2025, pero perdió tracción en mayo.</h3>
+<p>El objetivo del plan es recuperar demanda en tiendas críticas sin sacrificar la experiencia premium de Tori Tori.</p>
+</div>
+<div class="executive-card light">
+<div class="executive-kicker">Prioridad comercial</div>
+<h3>Reactivar usuarios y proteger Prime.</h3>
+<p>La volatilidad viene de una base activa poco estable y una alta dependencia de usuarios reactivados.</p>
+</div>
+<div class="executive-card light">
+<div class="executive-kicker">Prioridad operativa</div>
+<h3>Disponibilidad, DR y Turbo.</h3>
+<p>Las mejoras operativas sostienen el ranking y convierten la inversión en órdenes recurrentes.</p>
+</div>
+</section>
+
+<!-- ─── 1. KPIs PRINCIPALES ─── -->
+<div class="section-header">
+<div class="section-num">1</div>
+<h2>Estado actual de la cuenta — Mayo 2026</h2>
+<p>Comparado vs Abril 2026 (LM) y Mayo 2025 (LY)</p>
+</div>
+<div class="kpi-grid">
+<div class="kpi-card" style="--accent: var(--red)">
+<div class="kpi-label">Venta Neta</div>
+<div class="kpi-value">$1.09M</div>
+<div class="kpi-delta neg">▼ -14.5% vs Abr-26</div>
+<div class="kpi-sub">+58.3% vs May-25</div>
+</div>
+<div class="kpi-card" style="--accent: var(--red)">
+<div class="kpi-label">Órdenes</div>
+<div class="kpi-value">985</div>
+<div class="kpi-delta neg">▼ -19.9% vs Abr-26</div>
+<div class="kpi-sub">+61.7% vs May-25</div>
+</div>
+<div class="kpi-card" style="--accent: var(--yellow)">
+<div class="kpi-label">Ticket Prom. (AOV)</div>
+<div class="kpi-value">$1,134</div>
+<div class="kpi-delta pos">▲ +8.3% vs Abr-26</div>
+<div class="kpi-sub">-0.6% vs May-25</div>
+</div>
+<div class="kpi-card" style="--accent: var(--red)">
+<div class="kpi-label">Usuarios únicos</div>
+<div class="kpi-value">692</div>
+<div class="kpi-delta neg">▼ -23.7% vs Abr-26</div>
+<div class="kpi-sub">+47.5% vs May-25</div>
+</div>
+<div class="kpi-card" style="--accent: var(--yellow)">
+<div class="kpi-label">Tasa de Conversión</div>
+<div class="kpi-value">10.5%</div>
+<div class="kpi-delta warn">— Sin cambio vs LM</div>
+<div class="kpi-sub">Benchmark: 12.7%</div>
+</div>
+<div class="kpi-card" style="--accent: var(--yellow)">
+<div class="kpi-label">Market Share</div>
+<div class="kpi-value">1.8%</div>
+<div class="kpi-delta warn">— Estable desde Ene-26</div>
+<div class="kpi-sub">Pico: 2.6% (Jun-25)</div>
+</div>
+</div>
+<!-- ─── 2. TENDENCIA HISTÓRICA ─── -->
+<div class="section-header" style="margin-top: 36px;">
+<div class="section-num">2</div>
+<h2>Tendencia histórica — 13 meses</h2>
+<p>May 2025 → May 2026</p>
+</div>
+<div class="chart-grid-2">
+<div class="card">
+<div class="card-title">Venta Neta mensual (MXN)
+        <span style="font-size:11px; color:var(--muted); font-family:'DM Sans'; font-weight:400">Pico Abr-26, caída en May-26</span>
+</div>
+<div class="card-subtitle">Crecimiento YoY sólido, pero con alta volatilidad mes a mes</div>
+<div class="chart-wrap tall">
+<canvas id="chartSales"></canvas>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Órdenes y Usuarios
+        <span style="font-size:11px; color:var(--muted); font-family:'DM Sans'; font-weight:400">Caída de demanda en mayo</span>
+</div>
+<div class="card-subtitle">Alta correlación entre usuarios activos y volumen de órdenes</div>
+<div class="chart-wrap tall">
+<canvas id="chartOrders"></canvas>
+</div>
+</div>
+</div>
+<div class="chart-grid-3">
+<div class="card">
+<div class="card-title">Ticket Promedio AOV (MXN)</div>
+<div class="card-subtitle">Tendencia estable pero sin crecimiento real</div>
+<div class="chart-wrap">
+<canvas id="chartAOV"></canvas>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Tasa de Conversión (%)</div>
+<div class="card-subtitle">13.5% debajo del benchmark de categoría (27%)</div>
+<div class="chart-wrap">
+<canvas id="chartConv"></canvas>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Market Share de Categoría (%)</div>
+<div class="card-subtitle">Sin recuperar los niveles de Jun-Jul 2025</div>
+<div class="chart-wrap">
+<canvas id="chartMS"></canvas>
+</div>
+</div>
+</div>
+<!-- ─── 3. DIAGNÓSTICO: VARIABLES CRÍTICAS ─── -->
+<div class="section-header">
+<div class="section-num">3</div>
+<h2>Variables que están causando la tendencia negativa</h2>
+</div>
+<div class="insight-box">
+<strong>📊 Lectura del patrón:</strong>
+<p>La caída de mayo no es estacional aislada — es el tercer mes con alta volatilidad (Feb-26 ↓14%, Mar-26 ↑, Abr-26 ↑, May-26 ↓20%). El problema estructural es <strong>la alta dependencia en usuarios reactivados (43.6%)</strong> con baja retención, combinado con un funnel de conversión por debajo del benchmark. El volumen crece YoY pero la base activa es inestable.</p>
+</div>
+<div class="card" style="margin-bottom: 16px;">
+<div class="card-title" style="margin-bottom: 12px;">Mapa de variables críticas</div>
+<table class="diag-table">
+<thead>
+<tr>
+<th>Variable</th>
+<th>Valor Actual</th>
+<th>Benchmark / Target</th>
+<th>Impacto</th>
+<th>Diagnóstico</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>🔴 Retención de usuarios</strong></td>
+<td>31.6% retenidos (may-26)</td>
+<td>&gt;45%</td>
+<td><span class="badge badge-red">Crítico</span></td>
+<td>Solo 219 de 692 usuarios del mes ya habían ordenado antes. La base no se consolida entre meses, generando volatilidad estructural en órdenes.</td>
+</tr>
+<tr>
+<td><strong>🔴 Dependencia en reactivados</strong></td>
+<td>43.6% del mix (302 usuarios)</td>
+<td>&lt;30%</td>
+<td><span class="badge badge-red">Crítico</span></td>
+<td>Más del 40% de los usuarios del mes llevaba más de 60 días sin ordenar. Indica que los clientes están probando la marca pero no regresando de forma orgánica.</td>
+</tr>
+<tr>
+<td><strong>🟡 Conversión vs benchmark</strong></td>
+<td>12.74% (funnel brand)</td>
+<td>14.29% benchmark</td>
+<td><span class="badge badge-yellow">Moderado</span></td>
+<td>La conversión total (OPC/SST) es 12.7% vs 14.3% benchmark de categoría. El cuello de botella está en el paso SST→ATC (19.1% vs 27% BM) — los usuarios entran a la tienda pero no agregan al carrito.</td>
+</tr>
+<tr>
+<td><strong>🔴 Caída Mayo (-19.9% órdenes)</strong></td>
+<td>985 órdenes</td>
+<td>Abr-26: 1,224</td>
+<td><span class="badge badge-red">Crítico</span></td>
+<td>La baja es transversal en casi todas las tiendas. Anatole -30%, Condesa -33.6%, Santa Fe -29.6%. Solo Duraznos creció (+35.2%). No hay trigger estacional obvio — sugiere pérdida de visibilidad en app.</td>
+</tr>
+<tr>
+<td><strong>🟡 Disponibilidad general</strong></td>
+<td>95.1% (may-26)</td>
+<td>98.0%</td>
+<td><span class="badge badge-yellow">Moderado</span></td>
+<td>Santa Fe en 89.5%, Condesa-Turbo en 91.2%, Anatole-Turbo en 92.4%. Tiendas Turbo con disponibilidad baja impactan directamente el volumen por horario peak.</td>
+</tr>
+<tr>
+<td><strong>🟡 Defect Rate por encima del límite</strong></td>
+<td>2.06% (may-26)</td>
+<td>Máx. 1.2%</td>
+<td><span class="badge badge-yellow">Moderado</span></td>
+<td>Altavista es el store con mayor problema (4.94% DR). El defect rate elevado golpea la recompra y reduce la calificación de la tienda, afectando visibilidad en el algoritmo.</td>
+</tr>
+<tr>
+<td><strong>🟡 Tiempo RT en tienda</strong></td>
+<td>5.43 min promedio</td>
+<td>Máx. 3 min</td>
+<td><span class="badge badge-yellow">Moderado</span></td>
+<td>Anatole-Turbo (13.26 min), Santa Fe (9.68 min) y Lomas (8.01 min) son las más problemáticas. El RT time elevado en Turbo elimina la ventaja de velocidad que justifica el canal.</td>
+</tr>
+<tr>
+<td><strong>🔵 Cooking Time sobre target</strong></td>
+<td>18.26 min (may-26)</td>
+<td>15 min (aliado)</td>
+<td><span class="badge badge-blue">Bajo</span></td>
+<td>Condesa en 26.39 min — casi el doble del target. Impacta el ATA y experiencia del usuario, pero menos urgente que los factores de demanda.</td>
+</tr>
+<tr>
+<td><strong>🔵 Market Share estancado</strong></td>
+<td>1.8%</td>
+<td>2.5%+ target</td>
+<td><span class="badge badge-blue">Estructural</span></td>
+<td>La participación no ha logrado consolidarse sobre el 2.5%. En meses pico (Abr-26) sube pero no se sostiene. Indica que el crecimiento de la cuenta no está superando el crecimiento de la categoría.</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ─── 4. PERFORMANCE POR TIENDA ─── -->
+<div class="section-header">
+<div class="section-num">4</div>
+<h2>Salud por tienda — Mayo 2026</h2>
+<p>Ordenado por % de crecimiento vs LM</p>
+</div>
+<div class="card" style="margin-bottom: 16px;">
+<table class="store-table">
+<thead>
+<tr>
+<th>Tienda</th>
+<th>Órdenes</th>
+<th>% vs LM</th>
+<th>Venta</th>
+<th>AOV</th>
+<th>Disponib.</th>
+<th>DR %</th>
+<th>RT Store</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tori Tori Duraznos</td>
+<td>96</td>
+<td style="color:var(--green)">+35.2%</td>
+<td>$109,813</td>
+<td>$1,144</td>
+<td>96.7%</td>
+<td>—</td>
+<td>5.88</td>
+<td><span class="badge badge-green">Creciendo</span></td>
+</tr>
+<tr>
+<td>Tori Tori Lomas</td>
+<td>102</td>
+<td style="color:var(--yellow)">-1.9%</td>
+<td>$146,977</td>
+<td>$1,441</td>
+<td>95.1%</td>
+<td>2.97%</td>
+<td>8.01</td>
+<td><span class="badge badge-yellow">Estable</span></td>
+</tr>
+<tr>
+<td>Tori Tori Altavista</td>
+<td>165</td>
+<td style="color:var(--yellow)">-4.6%</td>
+<td>$211,636</td>
+<td>$1,283</td>
+<td>99.2%</td>
+<td>4.94%</td>
+<td>3.86</td>
+<td><span class="badge badge-red">DR crítico</span></td>
+</tr>
+<tr>
+<td>Tori Tori Anatole</td>
+<td>263</td>
+<td style="color:var(--red)">-30.2%</td>
+<td>$277,115</td>
+<td>$1,054</td>
+<td>98.5%</td>
+<td>1.93%</td>
+<td>6.59</td>
+<td><span class="badge badge-red">Caída fuerte</span></td>
+</tr>
+<tr>
+<td>Tori Tori Condesa</td>
+<td>196</td>
+<td style="color:var(--red)">-33.6%</td>
+<td>$187,582</td>
+<td>$957</td>
+<td>99.1%</td>
+<td>—</td>
+<td>0.91</td>
+<td><span class="badge badge-red">Caída fuerte</span></td>
+</tr>
+<tr>
+<td>Tori Tori Santa Fe</td>
+<td>100</td>
+<td style="color:var(--red)">-29.6%</td>
+<td>$127,370</td>
+<td>$1,274</td>
+<td>89.5%</td>
+<td>1.01%</td>
+<td>9.68</td>
+<td><span class="badge badge-red">Disponib. baja</span></td>
+</tr>
+<tr>
+<td>Tori Tori Satélite</td>
+<td>16</td>
+<td style="color:var(--red)">-56.8%</td>
+<td>$14,172</td>
+<td>$886</td>
+<td>95.9%</td>
+<td>—</td>
+<td>0.65</td>
+<td><span class="badge badge-red">Caída crítica</span></td>
+</tr>
+<tr style="background: rgba(255,255,255,0.02); font-style: italic;">
+<td><em>Turbo channels</em></td>
+<td>47</td>
+<td style="color:var(--green)">Varios +</td>
+<td>$42,589</td>
+<td>—</td>
+<td>91-94%</td>
+<td>—</td>
+<td>7-13</td>
+<td><span class="badge badge-blue">Oportunidad</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- ─── 5. VARIABLES DE VALOR ─── -->
+<div class="section-header">
+<div class="section-num">5</div>
+<h2>Variables de valor — Palancas para cambio de tendencia</h2>
+<p>Priorización por impacto en GMV y velocidad de ejecución</p>
+</div>
+<div class="pillars-grid" style="margin-bottom: 16px;">
+<!-- PALANCA 1: DEMANDA -->
+<div class="pillar-card">
+<div class="pillar-header">
+<div class="pillar-icon" style="background: rgba(255,68,31,0.15);">🎯</div>
+<div>
+<div class="pillar-title">Demanda y Adquisición</div>
+<div class="pillar-subtitle">Recuperar volumen de mayo — acción inmediata</div>
+</div>
+</div>
+<ul class="lever-list">
+<li class="lever-item high">
+<span class="lever-icon">🏆</span>
+<div class="lever-text">
+<strong>Activar campaña de visibilidad en app (Ads Rappi)</strong>
+<span>Anatole, Condesa y Santa Fe perdieron -30% de órdenes en un mes. La causa más probable es pérdida de posicionamiento en el algoritmo. Activar Ads Rappi con foco en estas 3 tiendas puede recuperar 150-200 órdenes mensuales inmediatamente.</span>
+</div>
+</li>
+<li class="lever-item high">
+<span class="lever-icon">🔁</span>
+<div class="lever-text">
+<strong>Campaña de reactivación de usuarios L60D</strong>
+<span>Solo 219 usuarios retenidos en mayo. Hay una masa de usuarios que ordena cada 2+ meses. Promos de reactivación dirigidas (cupones personalizados) son el lever más directo para elevar órdenes en 3-4 semanas.</span>
+</div>
+</li>
+<li class="lever-item med">
+<span class="lever-icon">📅</span>
+<div class="lever-text">
+<strong>Activar promociones en días de menor consumo</strong>
+<span>Lunes (-38%) y jueves (-38%) tienen las mayores caídas vs viernes. Promos de "Midweek" o combos de L-J con descuento en delivery pueden nivelar el volumen semanal.</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- PALANCA 2: CONVERSIÓN -->
+<div class="pillar-card">
+<div class="pillar-header">
+<div class="pillar-icon" style="background: rgba(255,208,74,0.15);">🔄</div>
+<div>
+<div class="pillar-title">Funnel de Conversión</div>
+<div class="pillar-subtitle">Cerrar la brecha SST→ATC vs benchmark</div>
+</div>
+</div>
+<ul class="lever-list">
+<li class="lever-item high">
+<span class="lever-icon">🖼️</span>
+<div class="lever-text">
+<strong>Optimización de portada y menú (ATC gap)</strong>
+<span>El paso SST→ATC es solo 19.1% vs 27% benchmark — los usuarios entran pero no agregan. Esto indica que la presentación de productos no genera el impulso. Revisar fotos, descripción y precio de los top-sellers (Brocheta, Chirashi, Yakimeshi).</span>
+</div>
+</li>
+<li class="lever-item high">
+<span class="lever-icon">⭐</span>
+<div class="lever-text">
+<strong>Reducir Defect Rate en Altavista (4.94%)</strong>
+<span>Altavista tiene el DR más alto (4.94% vs máx 1.2%). Un DR alto baja la calificación de la tienda, reduce visibilidad en búsquedas y desincentiva la recompra. Revisar proceso de armado de pedido y stock de productos.</span>
+</div>
+</li>
+<li class="lever-item med">
+<span class="lever-icon">💬</span>
+<div class="lever-text">
+<strong>Programas de cross-sell y combos estratégicos</strong>
+<span>El Nigiri de Salmón cayó -44% y el Yakimeshi -35%. Crear combos que empujen estos productos con ancla en los más vendidos (Brocheta + Nigiri). La frecuencia actual de 1.42 órdenes/usuario tiene margen de crecimiento.</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- PALANCA 3: OPS -->
+<div class="pillar-card">
+<div class="pillar-header">
+<div class="pillar-icon" style="background: rgba(0,200,150,0.15);">⚙️</div>
+<div>
+<div class="pillar-title">Operaciones y Disponibilidad</div>
+<div class="pillar-subtitle">Resolver cuellos de botella que impactan ranking</div>
+</div>
+</div>
+<ul class="lever-list">
+<li class="lever-item high">
+<span class="lever-icon">🕐</span>
+<div class="lever-text">
+<strong>Disponibilidad Santa Fe al 98% (actualmente 89.5%)</strong>
+<span>Santa Fe perdió -29.6% de órdenes y tiene la disponibilidad más baja entre tiendas regulares. Cada punto porcentual de disponibilidad tiene impacto directo en órdenes. Revisar horarios de apertura y cierre de menú.</span>
+</div>
+</li>
+<li class="lever-item med">
+<span class="lever-icon">🛵</span>
+<div class="lever-text">
+<strong>Reducir RT en Tienda para canales Turbo (&lt;3 min)</strong>
+<span>Anatole-Turbo tiene 13.26 min de RT y Santa Fe 9.68 min. Un canal Turbo con 13 min de espera pierde la propuesta de valor. Revisar proceso de pickup y señalización para RTs en estas ubicaciones.</span>
+</div>
+</li>
+<li class="lever-item med">
+<span class="lever-icon">🍳</span>
+<div class="lever-text">
+<strong>Cooking Time Condesa: de 26 min a &lt;15 min</strong>
+<span>Condesa registra 26 min de cocción — el doble del target. Esto eleva el tiempo total de entrega a 46.87 min y reduce la satisfacción del cliente, impactando calificación y recompra.</span>
+</div>
+</li>
+</ul>
+</div>
+<!-- PALANCA 4: RETENCIÓN -->
+<div class="pillar-card">
+<div class="pillar-header">
+<div class="pillar-icon" style="background: rgba(74,158,255,0.15);">👥</div>
+<div>
+<div class="pillar-title">Retención y Frecuencia</div>
+<div class="pillar-subtitle">Construir base activa estable mes a mes</div>
+</div>
+</div>
+<ul class="lever-list">
+<li class="lever-item high">
+<span class="lever-icon">💎</span>
+<div class="lever-text">
+<strong>Estrategia de retención usuarios Prime (82% del GMV)</strong>
+<span>Los usuarios Prime generan 82.5% del GMV pero bajaron -24.9% en mayo. Dado que Prime tiene mayor frecuencia y ticket, mantener activos a estos usuarios es la palanca de mayor impacto. Evaluar beneficios exclusivos para usuarios Prime de la cuenta.</span>
+</div>
+</li>
+<li class="lever-item med">
+<span class="lever-icon">📊</span>
+<div class="lever-text">
+<strong>Reducir churn: de 43.6% reactivados a &lt;30%</strong>
+<span>La cuenta tiene un ciclo de "boom y caída" porque los reactivados entran un mes y se van. Construir hábito con comunicación post-pedido, recordatorios y programas de fidelidad puede transformar reactivados en retenidos.</span>
+</div>
+</li>
+<li class="lever-item low">
+<span class="lever-icon">🆕</span>
+<div class="lever-text">
+<strong>Impulsar nuevos usuarios (solo 24.7% first orders)</strong>
+<span>Los nuevos usuarios están cayendo como porcentaje del mix. Trabajar en campañas de conquista en microzones de alta oportunidad (especialmente Condesa-Roma donde el benchmark de conversión es superior) puede elevar la captación.</span>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<!-- ─── 6. ROADMAP DE ACCIONES ─── -->
+<div class="section-header">
+<div class="section-num">6</div>
+<h2>Plan de acción por horizonte</h2>
+</div>
+<div class="roadmap">
+<div class="roadmap-col">
+<div class="roadmap-col-header now">🔥 Inmediato (0–4 semanas)</div>
+<div class="roadmap-items">
+<div class="roadmap-item">
+<strong>Activar Ads Rappi en Anatole, Condesa y Santa Fe</strong>
+<span>Recuperar posicionamiento en búsquedas. Meta: +15% órdenes en tiendas caídas.</span>
+</div>
+<div class="roadmap-item">
+<strong>Campaña promos de reactivación L60D</strong>
+<span>Segmentar usuarios inactivos con coupon personalizado. Meta: 100+ usuarios reactivados.</span>
+</div>
+<div class="roadmap-item">
+<strong>Subir disponibilidad Santa Fe a 95%+</strong>
+<span>Ajustar horarios y cerrar gaps de menú. KPI semana a semana.</span>
+</div>
+<div class="roadmap-item">
+<strong>Plan correctivo DR en Altavista</strong>
+<span>Reducir defect rate de 4.94% a &lt;2%. Revisar armado de pedidos y stock.</span>
+</div>
+</div>
+</div>
+<div class="roadmap-col">
+<div class="roadmap-col-header soon">⚡ Corto plazo (1–2 meses)</div>
+<div class="roadmap-items">
+<div class="roadmap-item">
+<strong>Optimización de menú y fotos top-sellers</strong>
+<span>Mejorar SST→ATC de 19% al 24%+. Benchmarking contra categoría Sushi.</span>
+</div>
+<div class="roadmap-item">
+<strong>Combos midweek para nivelar demanda L-J</strong>
+<span>Diseñar combo con anchor product + item caído (Nigiri, Yakimeshi). Meta: +20% órdenes día semana.</span>
+</div>
+<div class="roadmap-item">
+<strong>Reducir RT en Turbo (&lt;5 min en todas)</strong>
+<span>Anatole-Turbo (13 min) y Santa Fe (9.68 min) son prioridad. Proceso de pickup y señalización.</span>
+</div>
+<div class="roadmap-item">
+<strong>Estrategia de retención usuarios Prime</strong>
+<span>Programa de beneficios exclusivos. Meta: reducir caída de Prime de -24.9% a -10%.</span>
+</div>
+</div>
+</div>
+<div class="roadmap-col">
+<div class="roadmap-col-header later">🎯 Mediano plazo (2–4 meses)</div>
+<div class="roadmap-items">
+<div class="roadmap-item">
+<strong>Incrementar Market Share de 1.8% a 2.5%+</strong>
+<span>Combinación de conversión mejorada + retención + ads. Requiere meses de ejecución consistente.</span>
+</div>
+<div class="roadmap-item">
+<strong>Estabilizar base de usuarios retenidos &gt;40%</strong>
+<span>De 31.6% retenidos actuales a &gt;40%. Requiere programa de fidelidad y comunicación post-pedido sistemática.</span>
+</div>
+<div class="roadmap-item">
+<strong>Optimizar Cooking Time Condesa (26→15 min)</strong>
+<span>Revisar proceso operativo, quizás menú simplificado para delivery. Impacto directo en NPS y recompra.</span>
+</div>
+<div class="roadmap-item">
+<strong>Consolidar canal Turbo como motor de crecimiento</strong>
+<span>Turbo bien ejecutado puede ser la palanca de crecimiento 2H2026. Disponibilidad 95%+ y RT &lt;3 min en todos los canales.</span>
+</div>
+</div>
+</div>
+</div>
+<!-- ─── 7. FUNNEL DE CONVERSIÓN ─── -->
+<div class="section-header">
+<div class="section-num">7</div>
+<h2>Análisis del Funnel — Brecha vs Benchmark</h2>
+</div>
+<div class="chart-grid-2">
+<div class="card">
+<div class="card-title">Funnel SST → OPC — Tori Tori vs Benchmark</div>
+<div class="card-subtitle">El mayor gap está en SST→ATC: 19.1% vs 27% benchmark (+7.9pp de oportunidad)</div>
+<div class="chart-wrap tall">
+<canvas id="chartFunnel"></canvas>
+</div>
+</div>
+<div class="card">
+<div class="card-title">Conversión semanal — Tendencia mayo</div>
+<div class="card-subtitle">Recuperación al final del mes (23.17%) sugiere que las acciones tardías sí generaron impacto</div>
+<div class="chart-wrap tall">
+<canvas id="chartWeeklyConv"></canvas>
+</div>
+</div>
+</div>
+</main>
+<footer>
+<span>Análisis generado con base en: X-Rays Dashboard MX, Global Rest Acumulado, Ops MX Comercial, Business Review MX · Rappi MX 2026</span>
+<span>KAM: mariana.palacios@rappi.com · Tori Tori · Brand ID 1098 &amp; 656149</span>
+</footer>
+<script>
+// ─── CHART CONFIG ───
+Chart.defaults.color = '#70675C';
+Chart.defaults.borderColor = 'rgba(32,25,16,0.10)';
+Chart.defaults.font.family = "'Manrope', sans-serif";
+Chart.defaults.font.size = 11;
+
+const months = ['May-25','Jun-25','Jul-25','Ago-25','Sep-25','Oct-25','Nov-25','Dic-25','Ene-26','Feb-26','Mar-26','Abr-26','May-26'];
+
+const gradRed = (ctx) => {
+  const g = ctx.createLinearGradient(0,0,0,260);
+  g.addColorStop(0,'rgba(255,68,31,0.35)');
+  g.addColorStop(1,'rgba(255,68,31,0)');
+  return g;
+};
+const gradOrange = (ctx) => {
+  const g = ctx.createLinearGradient(0,0,0,260);
+  g.addColorStop(0,'rgba(255,200,100,0.3)');
+  g.addColorStop(1,'rgba(255,200,100,0)');
+  return g;
+};
+const gradGreen = (ctx) => {
+  const g = ctx.createLinearGradient(0,0,0,260);
+  g.addColorStop(0,'rgba(0,200,150,0.3)');
+  g.addColorStop(1,'rgba(0,200,150,0)');
+  return g;
+};
+
+// ─── CHART 1: SALES ───
+const c1 = document.getElementById('chartSales');
+new Chart(c1, {
+  type:'line',
+  data:{
+    labels: months,
+    datasets:[{
+      label:'Venta Neta (MXN)',
+      data:[689338,615183,587257,708190,741209,804751,934630,955525,1129560,1056609,1101506,1276297,1091222],
+      borderColor:'#FF6B35',
+      backgroundColor: gradRed(c1.getContext('2d')),
+      fill:true, tension:0.3, pointRadius:4, pointBackgroundColor:'#FF6B35',
+      pointHoverRadius:6
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:v=>' $'+v.raw.toLocaleString()}}},
+    scales:{
+      y:{grid:{color:'rgba(32,25,16,0.08)'}, ticks:{callback:v=>v>=1000000?`$${(v/1000000).toFixed(1)}M`:`$${(v/1000).toFixed(0)}K`}},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// ─── CHART 2: ORDERS & USERS ───
+const c2 = document.getElementById('chartOrders');
+new Chart(c2, {
+  type:'bar',
+  data:{
+    labels: months,
+    datasets:[
+      {
+        label:'Órdenes',
+        data:[609,550,505,590,577,638,764,825,969,902,975,1224,985],
+        backgroundColor:'rgba(255,68,31,0.6)',
+        borderColor:'#FF441F', borderWidth:1, borderRadius:4,
+        yAxisID:'y'
+      },
+      {
+        label:'Usuarios',
+        data:[430,417,458,548,568,630,638,699,781,618,null,907,692],
+        type:'line', borderColor:'#4A9EFF', backgroundColor:'rgba(74,158,255,0.1)',
+        fill:true, tension:0.3, pointRadius:3, yAxisID:'y1'
+      }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top', labels:{boxWidth:12, padding:16}}},
+    scales:{
+      y:{position:'left', grid:{color:'rgba(32,25,16,0.08)'}, title:{display:true, text:'Órdenes', color:'#FF441F', font:{size:10}}},
+      y1:{position:'right', grid:{display:false}, title:{display:true, text:'Usuarios', color:'#4A9EFF', font:{size:10}}},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// ─── CHART 3: AOV ───
+const c3 = document.getElementById('chartAOV');
+new Chart(c3, {
+  type:'line',
+  data:{
+    labels: months,
+    datasets:[{
+      label:'AOV (MXN)',
+      data:[1132,1111,1285,1043,1119,1158,1171,1200,1223,1166,1130,1163,1134],
+      borderColor:'#FFD04A', backgroundColor:'rgba(255,208,74,0.1)',
+      fill:true, tension:0.4, pointRadius:3
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}},
+    scales:{
+      y:{grid:{color:'rgba(32,25,16,0.08)'}, ticks:{callback:v=>'$'+v.toLocaleString()}, min:900, max:1400},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// ─── CHART 4: CONVERSION ───
+const c4 = document.getElementById('chartConv');
+new Chart(c4, {
+  type:'line',
+  data:{
+    labels: months,
+    datasets:[
+      {
+        label:'Conversión (%)',
+        data:[10.5,12.4,8.2,12.4,9.7,9.2,10.5,9.2,10.6,11.0,10.9,9.7,10.5],
+        borderColor:'#9B6DFF', backgroundColor:'rgba(155,109,255,0.1)',
+        fill:true, tension:0.4, pointRadius:3
+      },
+      {
+        label:'Benchmark (12.7%)',
+        data:[12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7],
+        borderColor:'rgba(32,25,16,0.30)', borderDash:[4,4],
+        borderWidth:1.5, pointRadius:0, fill:false
+      }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top', labels:{boxWidth:10, padding:12, font:{size:10}}}},
+    scales:{
+      y:{grid:{color:'rgba(32,25,16,0.08)'}, ticks:{callback:v=>v+'%'}, min:6, max:14},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// ─── CHART 5: MARKET SHARE ───
+const c5 = document.getElementById('chartMS');
+new Chart(c5, {
+  type:'line',
+  data:{
+    labels: months,
+    datasets:[
+      {
+        label:'Market Share',
+        data:[1.8,2.6,3.2,1.6,2.2,2.5,2.6,1.7,1.8,2.1,2.5,1.7,1.8],
+        borderColor:'#00C896', backgroundColor:'rgba(0,200,150,0.1)',
+        fill:true, tension:0.4, pointRadius:3
+      },
+      {
+        label:'Target 2.5%',
+        data:[2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5],
+        borderColor:'rgba(32,25,16,0.25)', borderDash:[4,4],
+        borderWidth:1.5, pointRadius:0, fill:false
+      }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top', labels:{boxWidth:10, padding:12, font:{size:10}}}},
+    scales:{
+      y:{grid:{color:'rgba(32,25,16,0.08)'}, ticks:{callback:v=>v+'%'}, min:0, max:4},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// ─── CHART 6: FUNNEL ───
+const c6 = document.getElementById('chartFunnel');
+new Chart(c6, {
+  type:'bar',
+  data:{
+    labels:['SST→ST','ST→ATC','ATC→PTC','PTC→OP','OP→OPC','Conv. Total'],
+    datasets:[
+      {
+        label:'Tori Tori',
+        data:[91.8,19.1,77.19,91.9,93.8,12.74],
+        backgroundColor:'rgba(255,107,53,0.7)', borderColor:'#FF6B35', borderWidth:1, borderRadius:4
+      },
+      {
+        label:'Benchmark Categoría',
+        data:[null,27.0,null,null,null,14.29],
+        backgroundColor:'rgba(32,25,16,0.08)', borderColor:'rgba(32,25,16,0.30)',
+        borderWidth:1.5, borderRadius:4
+      }
+    ]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{position:'top', labels:{boxWidth:12, padding:14}}},
+    scales:{
+      y:{grid:{color:'rgba(32,25,16,0.08)'}, ticks:{callback:v=>v+'%'}, min:0, max:100},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+// ─── CHART 7: WEEKLY CONV ───
+const c7 = document.getElementById('chartWeeklyConv');
+new Chart(c7, {
+  type:'line',
+  data:{
+    labels:['27-Abr','04-May','11-May','18-May','25-May'],
+    datasets:[{
+      label:'Conversión Semanal (%)',
+      data:[10.69,10.22,11.14,14.97,23.17],
+      borderColor:'#9B6DFF', backgroundColor:'rgba(155,109,255,0.15)',
+      fill:true, tension:0.4, pointRadius:6,
+      pointBackgroundColor: ctx => {
+        const v = ctx.raw;
+        if(v > 15) return '#00C896';
+        if(v > 12) return '#FFD04A';
+        return '#FF4444';
+      }
+    }]
+  },
+  options:{
+    responsive:true, maintainAspectRatio:false,
+    plugins:{legend:{display:false}, tooltip:{callbacks:{label:v=>` ${v.raw}%`}}},
+    scales:{
+      y:{grid:{color:'rgba(32,25,16,0.08)'}, ticks:{callback:v=>v+'%'}, min:8, max:26},
+      x:{grid:{display:false}}
+    }
+  }
+});
+
+</script>
+</body>
+</html>
