@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Tori Tori × Rappi — Reporte por Sucursal | Rappi Colors</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Syne:wght@600;700;800&display=swap');
+:root {
+  --rappi-red:#FF441F;
+  --rappi-red-2:#E63818;
+  --rappi-orange:#FF6B35;
+  --rappi-coral:#FF8A70;
+  --rappi-cream:#FFF3EE;
+  --rappi-cream-2:#FFF9F6;
+  --rappi-ink:#171717;
+  --rappi-ink-2:#2A2523;
+  --rappi-gray:#6F6460;
+  --rappi-line:rgba(255,68,31,.14);
+  --rappi-card:#FFFFFF;
+  --green:#00A878;
+  --red:#D9361E;
+  --yellow:#D99000;
+  --blue:#276EF1;
+  --purple:#7C3AED;
+  --shadow:0 18px 48px rgba(255,68,31,.13);
+  --shadow-soft:0 10px 28px rgba(39,25,19,.08);
+  --radius:22px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at 6% 0%, rgba(255,68,31,.20), transparent 30%),
+    radial-gradient(circle at 92% 10%, rgba(255,107,53,.18), transparent 28%),
+    linear-gradient(180deg,#FFF7F3 0%,#FFFFFF 42%,#FFF5F0 100%);
+  color:var(--rappi-ink);
+  font-family:'Inter',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  font-size:14px;
+  line-height:1.62;
+  padding-bottom:28px;
+}
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:.45;
+  background-image:
+    linear-gradient(rgba(255,68,31,.055) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,68,31,.055) 1px, transparent 1px);
+  background-size:38px 38px;
+  mask-image:linear-gradient(180deg,black,transparent 72%);
+  z-index:0;
+}
+body>*{position:relative;z-index:1}
+
+/* HEADER */
+header{
+  max-width:1540px;
+  margin:28px auto 0;
+  padding:42px 48px 38px;
+  position:relative;
+  overflow:hidden;
+  border:1px solid rgba(255,68,31,.22);
+  border-radius:30px 30px 0 0;
+  background:
+    radial-gradient(circle at 92% 12%, rgba(255,255,255,.22), transparent 28%),
+    linear-gradient(135deg,#FF441F 0%,#FF5A2F 46%,#FF7A42 100%);
+  color:white;
+  box-shadow:var(--shadow);
+}
+header::before{
+  content:'Rappi';
+  position:absolute;
+  right:38px;
+  top:18px;
+  font-family:'Syne',sans-serif;
+  font-size:108px;
+  line-height:1;
+  font-weight:800;
+  letter-spacing:-.08em;
+  color:rgba(255,255,255,.10);
+  pointer-events:none;
+}
+header::after{
+  content:'';
+  position:absolute;
+  inset:auto 48px 0;
+  height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.72),transparent);
+}
+.header-top{display:flex;align-items:flex-start;justify-content:space-between;flex-wrap:wrap;gap:24px}
+.brand-badge{
+  display:inline-flex;align-items:center;gap:10px;
+  background:rgba(255,255,255,.16);
+  border:1px solid rgba(255,255,255,.28);
+  padding:8px 15px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:900;
+  color:#FFF;
+  letter-spacing:.09em;
+  text-transform:uppercase;
+  margin-bottom:16px;
+  backdrop-filter:blur(10px);
+}
+.brand-badge::before{content:'●';color:#FFF;font-size:12px}
+h1{
+  font-family:'Syne',sans-serif;
+  font-size:clamp(38px,5vw,68px);
+  font-weight:800;
+  line-height:.96;
+  letter-spacing:-.055em;
+}
+h1 span{color:#3B0A00;font-family:'Inter',sans-serif;font-weight:900}
+.header-meta{max-width:830px;font-size:14px;color:rgba(255,255,255,.82);margin-top:16px}
+.date-badge{
+  min-width:250px;
+  background:rgba(255,255,255,.15);
+  border:1px solid rgba(255,255,255,.28);
+  padding:14px 18px;
+  border-radius:18px;
+  font-size:12px;
+  color:rgba(255,255,255,.78);
+  white-space:nowrap;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.14);
+  backdrop-filter:blur(12px);
+}
+.date-badge strong{color:white;display:block;font-size:14px;margin-bottom:2px}
+
+/* ALERT */
+.alert-banner{
+  max-width:1540px;
+  margin:0 auto;
+  background:linear-gradient(90deg,#1F1714 0%,#2A1B16 100%);
+  border:1px solid rgba(255,68,31,.25);
+  border-top:none;
+  padding:17px 24px;
+  display:flex;
+  align-items:center;
+  gap:13px;
+  font-size:13px;
+  color:#FFD7CC;
+  box-shadow:var(--shadow-soft);
+}
+.alert-banner strong{color:white}
+.alert-icon{width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;border-radius:999px;background:rgba(255,68,31,.22);font-size:16px;flex:0 0 auto}
+
+/* TAB NAV */
+.tab-nav-wrap{
+  max-width:1540px;
+  margin:0 auto;
+  background:rgba(255,255,255,.92);
+  border:1px solid rgba(255,68,31,.16);
+  border-top:none;
+  padding:0 24px;
+  overflow-x:auto;
+  white-space:nowrap;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,68,31,.35) transparent;
+  box-shadow:0 12px 28px rgba(39,25,19,.06);
+}
+.tab-nav-wrap::-webkit-scrollbar{height:4px}.tab-nav-wrap::-webkit-scrollbar-track{background:transparent}.tab-nav-wrap::-webkit-scrollbar-thumb{background:rgba(255,68,31,.35);border-radius:2px}
+.tab-nav{display:inline-flex;gap:0;min-width:100%}
+.tab-btn{
+  font-family:'Inter',sans-serif;
+  font-size:12px;
+  font-weight:900;
+  padding:15px 20px;
+  border:none;
+  background:transparent;
+  color:rgba(31,23,20,.56);
+  cursor:pointer;
+  position:relative;
+  transition:color .18s, background .18s;
+  white-space:nowrap;
+  letter-spacing:.01em;
+  border-bottom:3px solid transparent;
+}
+.tab-btn:hover{color:var(--rappi-red);background:rgba(255,68,31,.045)}
+.tab-btn.active{color:var(--rappi-red);border-bottom-color:var(--rappi-red);background:linear-gradient(180deg,rgba(255,68,31,.075),rgba(255,68,31,.02))}
+.tab-btn .tab-dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:7px;vertical-align:middle;margin-top:-2px;background:var(--rappi-red)!important}
+.tab-btn .tab-status{font-size:10px;padding:2px 7px;border-radius:99px;margin-left:7px;font-weight:900;letter-spacing:.04em;vertical-align:middle}
+.tab-status.s-red{background:rgba(217,54,30,.12);color:var(--red)}
+.tab-status.s-green{background:rgba(0,168,120,.12);color:var(--green)}
+.tab-status.s-yellow{background:rgba(217,144,0,.13);color:var(--yellow)}
+.tab-status.s-gray{background:rgba(31,23,20,.07);color:rgba(31,23,20,.56)}
+
+/* PAGE */
+.page{display:none}.page.active{display:block;animation:pageIn .22s ease}@keyframes pageIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
+main{padding:36px 34px 20px;max-width:1540px;margin:0 auto}
+
+/* SECTION HEADERS */
+.section-header{display:flex;align-items:center;gap:12px;margin-bottom:18px;margin-top:46px}.section-header:first-child{margin-top:0}
+.section-num{width:31px;height:31px;background:linear-gradient(135deg,var(--rappi-red),var(--rappi-orange));color:white;border:1px solid rgba(255,68,31,.24);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;flex-shrink:0;box-shadow:0 8px 18px rgba(255,68,31,.18)}
+.section-header h2{font-family:'Syne',sans-serif;color:var(--rappi-ink);font-size:25px;font-weight:800;letter-spacing:-.04em}
+.section-header p{font-size:12px;color:var(--rappi-gray);margin-left:auto;text-align:right}
+
+/* KPI */
+.kpi-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-bottom:10px}@media(max-width:1260px){.kpi-grid{grid-template-columns:repeat(3,1fr)}}
+.kpi-card{background:var(--rappi-card);border:1px solid rgba(255,68,31,.13);border-radius:20px;padding:18px 16px 16px;position:relative;overflow:hidden;transition:transform .22s,box-shadow .22s,border-color .22s;box-shadow:var(--shadow-soft)}
+.kpi-card:hover{transform:translateY(-3px);border-color:rgba(255,68,31,.34);box-shadow:var(--shadow)}
+.kpi-card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 90% 0%,color-mix(in srgb,var(--accent,var(--rappi-red)) 17%,transparent),transparent 42%);opacity:.8;pointer-events:none}
+.kpi-card::after{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:var(--accent,var(--rappi-red))}
+.kpi-label,.kpi-value,.kpi-delta,.kpi-sub{position:relative;z-index:1}.kpi-label{font-size:10.5px;color:var(--rappi-gray);text-transform:uppercase;letter-spacing:.08em;margin-bottom:10px;font-weight:900}.kpi-value{font-size:28px;font-weight:900;line-height:1;letter-spacing:-.05em;margin-bottom:8px;color:var(--rappi-ink)}.kpi-delta{font-size:12px;font-weight:900;display:flex;align-items:center;gap:4px}.kpi-delta.pos{color:var(--green)}.kpi-delta.neg{color:var(--red)}.kpi-delta.warn{color:var(--yellow)}.kpi-sub{font-size:11px;color:var(--rappi-gray);margin-top:2px}
+
+/* CARDS */
+.chart-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:18px}.chart-grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:18px;margin-bottom:18px}@media(max-width:1100px){.chart-grid-2,.chart-grid-3{grid-template-columns:1fr}}
+.card{background:var(--rappi-card);border:1px solid rgba(255,68,31,.13);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow-soft);overflow:hidden;position:relative}.card::before{content:'';position:absolute;top:0;left:22px;right:22px;height:1px;background:linear-gradient(90deg,transparent,rgba(255,68,31,.36),transparent)}
+.card-title{font-size:14px;font-weight:900;margin-bottom:4px;display:flex;align-items:center;justify-content:space-between;gap:10px;color:var(--rappi-ink);letter-spacing:-.01em}.card-title span{color:var(--rappi-gray)!important}.card-subtitle{font-size:12px;color:var(--rappi-gray);margin-bottom:16px}.chart-wrap{position:relative;height:214px}.chart-wrap.tall{height:270px}
+
+/* TABLES */
+.diag-table,.store-table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}.diag-table th,.store-table th{font-size:10.5px;font-weight:900;text-transform:uppercase;letter-spacing:.07em;color:var(--rappi-gray);text-align:left;padding:10px 12px;border-bottom:1px solid rgba(255,68,31,.12);background:rgba(255,68,31,.045)}.diag-table td,.store-table td{padding:12px;border-bottom:1px solid rgba(31,23,20,.07);vertical-align:top;color:#2A2520}.diag-table tr:last-child td,.store-table tr:last-child td{border-bottom:none}.diag-table tr:hover td,.store-table tr:hover td{background:rgba(255,68,31,.04)}.store-table{font-size:12.5px}.store-table th{text-align:right;white-space:nowrap}.store-table th:first-child{text-align:left}.store-table td{text-align:right;font-variant-numeric:tabular-nums}.store-table td:first-child{text-align:left;font-weight:800}
+.badge{display:inline-block;padding:4px 9px;border-radius:999px;font-size:10.5px;font-weight:900;white-space:nowrap;border:1px solid currentColor}.badge-green{background:rgba(0,168,120,.10);color:var(--green)}.badge-yellow{background:rgba(217,144,0,.12);color:var(--yellow)}.badge-red{background:rgba(217,54,30,.10);color:var(--red)}.badge-blue{background:rgba(39,110,241,.10);color:var(--blue)}.badge-gold{background:rgba(255,68,31,.10);color:var(--rappi-red)}
+
+/* INSIGHT */
+.insight-box{background:linear-gradient(135deg,#1C1715,#2A1710 60%,#3A160B);border:1px solid rgba(255,68,31,.30);border-radius:22px;padding:20px 22px;margin-bottom:20px;font-size:13.5px;color:rgba(255,255,255,.90);box-shadow:var(--shadow-soft)}.insight-box strong{color:#FFF;font-weight:900}.insight-box p{color:rgba(255,255,255,.76);margin-top:6px;line-height:1.75}.insight-box p strong{color:#fff3d7}
+
+/* EXECUTIVE STRIP */
+.executive-strip{display:grid;grid-template-columns:1.25fr 1fr 1fr;gap:16px;margin:0 0 30px}.executive-card{background:linear-gradient(135deg,#FF441F,#FF6B35);color:white;border:1px solid rgba(255,68,31,.20);border-radius:24px;padding:22px;box-shadow:var(--shadow-soft);min-height:142px}.executive-card.light{background:white;color:var(--rappi-ink);border:1px solid rgba(255,68,31,.13)}.executive-kicker{font-size:10.5px;text-transform:uppercase;letter-spacing:.10em;color:rgba(255,255,255,.78);font-weight:900;margin-bottom:10px}.executive-card.light .executive-kicker{color:var(--rappi-red)}.executive-card h3{font-family:'Syne',sans-serif;font-size:22px;line-height:1.08;letter-spacing:-.04em;margin-bottom:10px}.executive-card p{color:rgba(255,255,255,.78);font-size:12.5px}.executive-card.light p{color:var(--rappi-gray)}@media(max-width:980px){.executive-strip{grid-template-columns:1fr}}
+
+/* PILLARS */
+.pillars-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px}@media(max-width:1000px){.pillars-grid{grid-template-columns:1fr}}.pillar-card{background:white;border:1px solid rgba(255,68,31,.13);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow-soft)}.pillar-header{display:flex;align-items:center;gap:12px;margin-bottom:17px}.pillar-icon{width:44px;height:44px;border-radius:15px;display:flex;align-items:center;justify-content:center;font-size:19px;flex-shrink:0;border:1px solid rgba(255,68,31,.13)}.pillar-title{font-family:'Syne',sans-serif;font-weight:800;font-size:20px;color:var(--rappi-ink);line-height:1.1}.pillar-subtitle{font-size:12px;color:var(--rappi-gray);margin-top:3px}.lever-list{list-style:none;display:flex;flex-direction:column;gap:10px}.lever-item{display:flex;align-items:flex-start;gap:11px;padding:13px 14px;background:rgba(255,68,31,.035);border-radius:14px;font-size:13px;border:1px solid rgba(255,68,31,.09);border-left:4px solid transparent}.lever-item.high{border-left-color:var(--green)}.lever-item.med{border-left-color:var(--yellow)}.lever-item.low{border-left-color:var(--blue)}.lever-icon{font-size:16px;margin-top:1px;flex-shrink:0}.lever-text strong{display:block;margin-bottom:3px;color:var(--rappi-ink)}.lever-text span{color:var(--rappi-gray);font-size:12px}
+
+/* ROADMAP */
+.roadmap{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}@media(max-width:1050px){.roadmap{grid-template-columns:1fr}}.roadmap-col{background:white;border:1px solid rgba(255,68,31,.13);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-soft)}.roadmap-col-header{padding:14px 18px;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.08em;display:flex;align-items:center;gap:8px}.roadmap-col-header.now{background:linear-gradient(90deg,rgba(255,68,31,.16),rgba(255,68,31,.04));color:var(--rappi-red)}.roadmap-col-header.soon{background:linear-gradient(90deg,rgba(255,107,53,.16),rgba(255,107,53,.04));color:#A84812}.roadmap-col-header.later{background:linear-gradient(90deg,rgba(39,110,241,.12),rgba(39,110,241,.04));color:var(--blue)}.roadmap-items{padding:14px;display:flex;flex-direction:column;gap:10px}.roadmap-item{background:rgba(255,68,31,.035);border:1px solid rgba(255,68,31,.09);border-radius:14px;padding:13px 14px;font-size:12.5px}.roadmap-item strong{display:block;margin-bottom:4px;font-size:13px;color:var(--rappi-ink)}.roadmap-item span{color:var(--rappi-gray);font-size:11.5px}
+
+/* STORE PAGES */
+.store-header-band{background:linear-gradient(135deg,#FF441F 0%,#FF6B35 100%);border:1px solid rgba(255,68,31,.22);border-radius:24px;padding:28px 32px;margin-bottom:22px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;color:white}.store-header-band.band-green{background:linear-gradient(135deg,#00A878 0%,#067A59 100%)}.store-header-band.band-critical{background:linear-gradient(135deg,#D9361E 0%,#FF441F 100%)}.shb-name{font-family:'Syne',sans-serif;font-size:34px;font-weight:800;letter-spacing:-.05em;line-height:1;margin-bottom:8px}.shb-sub{font-size:12.5px;color:rgba(255,255,255,.72);margin-bottom:12px}.shb-badges{display:flex;gap:8px;flex-wrap:wrap}.store-header-band .badge{background:rgba(255,255,255,.15)!important;color:white!important;border-color:rgba(255,255,255,.45)!important}.shb-kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}@media(max-width:900px){.shb-kpis{grid-template-columns:repeat(2,1fr)}.store-header-band{grid-template-columns:1fr}}.shb-kpi{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.26);border-radius:14px;padding:14px;text-align:right;backdrop-filter:blur(10px)}.shb-kpi-label{font-size:10px;text-transform:uppercase;letter-spacing:.08em;color:rgba(255,255,255,.65);font-weight:900;margin-bottom:6px}.shb-kpi-value{font-size:24px;font-weight:900;letter-spacing:-.04em;line-height:1;margin-bottom:4px}.shb-kpi-delta{font-size:11px;font-weight:800}.d-pos{color:#C9FFE9}.d-neg{color:#FFE1DA}.d-warn{color:#FFF1B7}.d-info{color:rgba(255,255,255,.55)}
+.ops-grid{display:flex;flex-direction:column;gap:0}.ops-row{display:grid;grid-template-columns:1fr 90px 80px 40px;gap:8px;align-items:center;padding:12px 0;border-bottom:1px solid rgba(31,23,20,.07);font-size:13px}.ops-row:last-child{border-bottom:none}.ops-label{font-weight:800;color:var(--rappi-ink)}.ops-val{text-align:right;font-weight:900;font-variant-numeric:tabular-nums}.ops-tgt{text-align:right;font-size:11px;color:var(--rappi-gray)}.ops-bar-wrap{height:6px;background:rgba(31,23,20,.10);border-radius:99px;overflow:hidden}.ops-bar{height:100%;border-radius:99px;transition:width .4s ease}
+.alert-list{display:flex;flex-direction:column;gap:9px}.al-item{display:flex;gap:11px;padding:13px 14px;border-radius:14px;font-size:13px;border:1px solid;line-height:1.5}.al-item.a-red{background:rgba(217,54,30,.07);border-color:rgba(217,54,30,.22);color:#5C1008}.al-item.a-yellow{background:rgba(217,144,0,.07);border-color:rgba(217,144,0,.22);color:#5C3A00}.al-item.a-green{background:rgba(0,168,120,.07);border-color:rgba(0,168,120,.22);color:#083D2A}.al-item.a-blue{background:rgba(39,110,241,.07);border-color:rgba(39,110,241,.22);color:#0D2E4A}.al-item strong{display:block;margin-bottom:3px;font-size:13px}
+.product-list{display:flex;flex-direction:column;gap:0}.prod-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(31,23,20,.07);font-size:12.5px}.prod-row:last-child{border-bottom:none}.prod-rank{width:22px;height:22px;background:rgba(255,68,31,.10);border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--rappi-red);flex-shrink:0}.prod-name{flex:1;font-weight:700;color:var(--rappi-ink)}.prod-vol{font-weight:900;font-variant-numeric:tabular-nums;color:var(--rappi-ink)}.prod-delta{font-size:11px;font-weight:800;min-width:52px;text-align:right}.defect-row{display:flex;align-items:flex-start;gap:8px;padding:9px 0;border-bottom:1px solid rgba(31,23,20,.07);font-size:12px}.defect-row:last-child{border-bottom:none}.defect-type{flex-shrink:0;padding:2px 7px;border-radius:6px;font-size:10.5px;font-weight:900}.dt-wrong{background:rgba(217,54,30,.12);color:var(--red)}.dt-missing{background:rgba(217,144,0,.12);color:var(--yellow)}.dt-damaged{background:rgba(39,110,241,.12);color:var(--blue)}.defect-product{flex:1;color:var(--rappi-ink)}.defect-date{color:var(--rappi-gray);font-size:11px;white-space:nowrap}
+.metric-comparison{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:16px}@media(max-width:900px){.metric-comparison{grid-template-columns:1fr 1fr}}.mc-card{background:white;border:1px solid rgba(255,68,31,.13);border-radius:16px;padding:16px;box-shadow:var(--shadow-soft);text-align:center}.mc-label{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:var(--rappi-gray);font-weight:900;margin-bottom:10px}.mc-value{font-size:26px;font-weight:900;letter-spacing:-.04em;margin-bottom:4px}.mc-target{font-size:11px;color:var(--rappi-gray)}.mc-status{font-size:11px;font-weight:900;margin-top:6px}
+
+footer{max-width:1540px;margin:26px auto 0;padding:18px 34px;display:flex;justify-content:space-between;gap:16px;font-size:11.5px;color:rgba(255,255,255,.72);background:linear-gradient(135deg,#1F1714,#2A1B16);border:1px solid rgba(255,68,31,.18);border-radius:22px}
+@media(max-width:780px){body{background:#FFF7F3}header{margin:0;border-radius:0;padding:32px 22px}.tab-nav-wrap{border-radius:0}main{padding:26px 16px}footer{border-radius:0;flex-direction:column}.kpi-grid{grid-template-columns:1fr}.metric-comparison{grid-template-columns:1fr}}
+
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="header-top">
+    <div>
+      <div class="brand-badge">Business Review · Rappi MX · 2026</div>
+      <h1>Tori Tori <span>×</span> Rappi</h1>
+      <p class="header-meta">Reporte completo por punto de venta — diagnóstico individual, métricas operativas y plan de acción por sucursal</p>
+    </div>
+    <div class="date-badge">
+      <strong>Mayo 2026 (cierre)</strong>
+      12 puntos de venta · CDMX<br>KAM: mariana.palacios@rappi.com
+    </div>
+  </div>
+</header>
+
+<div class="alert-banner">
+  <span class="alert-icon">⚠️</span>
+  <span><strong>Señal de alerta:</strong> Mayo 2026 registra caída de -19.9% en órdenes y -13.3% en venta vs Abril 2026 — revisar cada sucursal para identificar causas específicas.</span>
+</div>
+
+<!-- TAB NAVIGATION -->
+<div class="tab-nav-wrap">
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="showPage('resumen')"><span class="tab-dot" style="background:#FF441F"></span>Resumen General</button>
+    <button class="tab-btn" onclick="showPage('anatole')"><span class="tab-dot" style="background:#00A878"></span>Anatole <span class="tab-status s-yellow">-30%</span></button>
+    <button class="tab-btn" onclick="showPage('altavista')"><span class="tab-dot" style="background:#D9361E"></span>Altavista <span class="tab-status s-red">DR crítico</span></button>
+    <button class="tab-btn" onclick="showPage('condesa')"><span class="tab-dot" style="background:#D9361E"></span>Condesa <span class="tab-status s-red">-34%</span></button>
+    <button class="tab-btn" onclick="showPage('lomas')"><span class="tab-dot" style="background:#D99000"></span>Lomas <span class="tab-status s-yellow">Estable</span></button>
+    <button class="tab-btn" onclick="showPage('santafe')"><span class="tab-dot" style="background:#D9361E"></span>Santa Fe <span class="tab-status s-red">Disponib.</span></button>
+    <button class="tab-btn" onclick="showPage('duraznos')"><span class="tab-dot" style="background:#00A878"></span>Duraznos <span class="tab-status s-green">+35%</span></button>
+    <button class="tab-btn" onclick="showPage('satelite')"><span class="tab-dot" style="background:#D9361E"></span>Satélite <span class="tab-status s-red">-57%</span></button>
+    <button class="tab-btn" onclick="showPage('turbo')"><span class="tab-dot" style="background:#276EF1"></span>Canales Turbo <span class="tab-status s-gray">5 pts</span></button>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════ -->
+<!-- PAGE: RESUMEN GENERAL                       -->
+<!-- ═══════════════════════════════════════════ -->
+<div class="page active" id="page-resumen">
+<main>
+  <section class="executive-strip">
+    <div class="executive-card">
+      <div class="executive-kicker">Resumen ejecutivo</div>
+      <h3>La cuenta crece vs 2025, pero perdió tracción en mayo.</h3>
+      <p>+58% de venta YoY y +62% en órdenes, pero con alta volatilidad mes a mes que indica una base activa inestable.</p>
+    </div>
+    <div class="executive-card light">
+      <div class="executive-kicker">Prioridad comercial</div>
+      <h3>Reactivar usuarios y proteger Prime.</h3>
+      <p>Solo 31.6% de usuarios retenidos. El 43.6% son reactivados. La base no se consolida entre meses.</p>
+    </div>
+    <div class="executive-card light">
+      <div class="executive-kicker">Prioridad operativa</div>
+      <h3>Disponibilidad, DR y Turbo.</h3>
+      <p>Defect rate 2.06% (límite 1.2%), disponibilidad 95.1% (target 98%), RT 5.43 min (límite 3 min).</p>
+    </div>
+  </section>
+
+  <div class="section-header">
+    <div class="section-num">1</div>
+    <h2>Estado actual — Mayo 2026</h2>
+    <p>vs Abril 2026 (LM) y Mayo 2025 (LY)</p>
+  </div>
+  <div class="kpi-grid">
+    <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Venta Neta</div><div class="kpi-value">$1.09M</div><div class="kpi-delta neg">▼ -14.5% vs Abr-26</div><div class="kpi-sub">+58.3% vs May-25</div></div>
+    <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Órdenes</div><div class="kpi-value">985</div><div class="kpi-delta neg">▼ -19.9% vs Abr-26</div><div class="kpi-sub">+61.7% vs May-25</div></div>
+    <div class="kpi-card" style="--accent:var(--yellow)"><div class="kpi-label">Ticket Prom. AOV</div><div class="kpi-value">$1,134</div><div class="kpi-delta pos">▲ +8.3% vs Abr-26</div><div class="kpi-sub">-0.6% vs May-25</div></div>
+    <div class="kpi-card" style="--accent:var(--red)"><div class="kpi-label">Usuarios únicos</div><div class="kpi-value">692</div><div class="kpi-delta neg">▼ -23.7% vs Abr-26</div><div class="kpi-sub">+47.5% vs May-25</div></div>
+    <div class="kpi-card" style="--accent:var(--yellow)"><div class="kpi-label">Conversión</div><div class="kpi-value">10.5%</div><div class="kpi-delta warn">— Sin cambio vs LM</div><div class="kpi-sub">BM categoría: 12.7%</div></div>
+    <div class="kpi-card" style="--accent:var(--yellow)"><div class="kpi-label">Market Share</div><div class="kpi-value">1.8%</div><div class="kpi-delta warn">— Estable</div><div class="kpi-sub">Pico: 3.2% (Jul-25)</div></div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-num">2</div>
+    <h2>Tendencia 13 meses</h2>
+    <p>May 2025 → May 2026</p>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card">
+      <div class="card-title">Venta Neta mensual (MXN)</div>
+      <div class="card-subtitle">Pico Abr-26 ($1.28M), caída notable en mayo</div>
+      <div class="chart-wrap tall"><canvas id="chartSales"></canvas></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Órdenes y Usuarios</div>
+      <div class="card-subtitle">Alta correlación — la base de usuarios define el volumen</div>
+      <div class="chart-wrap tall"><canvas id="chartOrders"></canvas></div>
+    </div>
+  </div>
+  <div class="chart-grid-3">
+    <div class="card"><div class="card-title">AOV Ticket Promedio</div><div class="card-subtitle">Estable, sin crecimiento real</div><div class="chart-wrap"><canvas id="chartAOV"></canvas></div></div>
+    <div class="card"><div class="card-title">Tasa de Conversión</div><div class="card-subtitle">Gap de -2.2pp vs benchmark</div><div class="chart-wrap"><canvas id="chartConv"></canvas></div></div>
+    <div class="card"><div class="card-title">Market Share Categoría</div><div class="card-subtitle">Sin recuperar niveles pico</div><div class="chart-wrap"><canvas id="chartMS"></canvas></div></div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-num">3</div>
+    <h2>Resumen salud de la red</h2>
+    <p>Todas las sucursales · Mayo 2026</p>
+  </div>
+  <div class="card" style="margin-bottom:18px">
+    <table class="store-table">
+      <thead><tr><th>Sucursal</th><th>Órdenes</th><th>% vs LM</th><th>Venta</th><th>AOV</th><th>Disponib.</th><th>DR%</th><th>RT Tienda</th><th>CT min</th><th>ATA min</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>🌟 Duraznos</td><td>96</td><td style="color:var(--green);font-weight:900">+35.2%</td><td>$109,813</td><td>$1,144</td><td style="color:var(--yellow)">96.7%</td><td style="color:var(--green)">—</td><td style="color:var(--yellow)">5.88</td><td style="color:var(--yellow)">16.9</td><td style="color:var(--red)">49.8</td><td><span class="badge badge-green">Creciendo</span></td></tr>
+        <tr><td>Lomas</td><td>102</td><td style="color:var(--yellow)">-1.9%</td><td>$146,977</td><td style="color:var(--green);font-weight:900">$1,441</td><td style="color:var(--yellow)">95.1%</td><td style="color:var(--yellow)">2.97%</td><td style="color:var(--red)">8.01</td><td style="color:var(--yellow)">17.8</td><td style="color:var(--red)">44.7</td><td><span class="badge badge-yellow">Estable</span></td></tr>
+        <tr><td>Altavista</td><td>165</td><td style="color:var(--yellow)">-4.6%</td><td>$211,636</td><td>$1,283</td><td style="color:var(--green)">99.2%</td><td style="color:var(--red);font-weight:900">4.94%</td><td style="color:var(--green)">3.86</td><td style="color:var(--yellow)">17.2</td><td style="color:var(--red)">48.4</td><td><span class="badge badge-red">DR crítico</span></td></tr>
+        <tr><td>Anatole</td><td>263</td><td style="color:var(--red)">-30.2%</td><td style="font-weight:900">$277,115</td><td>$1,054</td><td style="color:var(--green)">98.5%</td><td style="color:var(--yellow)">1.93%</td><td style="color:var(--red)">6.59</td><td style="color:var(--yellow)">16.9</td><td style="color:var(--yellow)">42.6</td><td><span class="badge badge-red">Caída fuerte</span></td></tr>
+        <tr><td>Condesa</td><td>196</td><td style="color:var(--red)">-33.6%</td><td>$187,582</td><td style="color:var(--red)">$957</td><td style="color:var(--green)">99.1%</td><td style="color:var(--green)">—</td><td style="color:var(--green)">0.91</td><td style="color:var(--red);font-weight:900">26.4</td><td style="color:var(--red)">46.9</td><td><span class="badge badge-red">CT crítico</span></td></tr>
+        <tr><td>Santa Fe</td><td>100</td><td style="color:var(--red)">-29.6%</td><td>$127,370</td><td>$1,274</td><td style="color:var(--red);font-weight:900">89.5%</td><td style="color:var(--green)">1.01%</td><td style="color:var(--red)">9.68</td><td style="color:var(--yellow)">16.9</td><td style="color:var(--red)">47.9</td><td><span class="badge badge-red">Disponib. baja</span></td></tr>
+        <tr><td>Satélite</td><td>16</td><td style="color:var(--red);font-weight:900">-56.8%</td><td style="color:var(--red)">$14,172</td><td style="color:var(--red)">$886</td><td style="color:var(--yellow)">95.9%</td><td style="color:var(--green)">—</td><td style="color:var(--green)">0.65</td><td style="color:var(--green)">12.8</td><td style="color:var(--red)">48.0</td><td><span class="badge badge-red">Caída crítica</span></td></tr>
+        <tr style="background:rgba(45,109,166,0.04)"><td>Turbo (5 pts)</td><td>47</td><td style="color:var(--green)">↑ creciendo</td><td>$42,589</td><td>—</td><td style="color:var(--red)">77–94%</td><td>—</td><td style="color:var(--red)">3–13 min</td><td>4–5</td><td>23–32</td><td><span class="badge badge-blue">Oportunidad</span></td></tr>
+        <tr style="font-weight:900;background:rgba(32,25,16,0.04)"><td>TOTAL RED</td><td>985</td><td style="color:var(--red)">-19.9%</td><td>$1,117,254</td><td>$1,134</td><td style="color:var(--yellow)">95.1%</td><td style="color:var(--yellow)">2.06%</td><td style="color:var(--yellow)">5.43</td><td style="color:var(--yellow)">18.3</td><td style="color:var(--red)">45.2</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="section-header">
+    <div class="section-num">4</div>
+    <h2>Variables críticas y palancas</h2>
+  </div>
+  <div class="insight-box">
+    <strong>📊 Diagnóstico de la cuenta:</strong>
+    <p>La caída de mayo es transversal pero diferenciada por tienda. El problema estructural es <strong>la alta dependencia en usuarios reactivados (43.6%)</strong> y un funnel SST→ATC 7.9pp por debajo del benchmark. Duraznos demuestra que el crecimiento es posible — su fórmula debe replicarse. Revisa cada pestaña para el diagnóstico específico de cada punto de venta.</p>
+  </div>
+  <div class="pillars-grid" style="margin-bottom:18px">
+    <div class="pillar-card">
+      <div class="pillar-header"><div class="pillar-icon" style="background:rgba(255,68,31,0.12)">🎯</div><div><div class="pillar-title">Demanda</div><div class="pillar-subtitle">Acciones de impacto inmediato</div></div></div>
+      <ul class="lever-list">
+        <li class="lever-item high"><span class="lever-icon">🏆</span><div class="lever-text"><strong>Activar Ads Rappi en Anatole, Condesa y Santa Fe</strong><span>3 tiendas cayeron -30% sin causa operativa — pérdida de posicionamiento en algoritmo. Ads recupera visibilidad en 1-2 semanas.</span></div></li>
+        <li class="lever-item high"><span class="lever-icon">🔁</span><div class="lever-text"><strong>Campaña de reactivación usuarios L60D</strong><span>Solo 219 retenidos de 692. La masa de usuarios inactivos es el activo más grande sin activar.</span></div></li>
+        <li class="lever-item med"><span class="lever-icon">📅</span><div class="lever-text"><strong>Promos midweek L-J</strong><span>Lunes -38% y jueves -38% vs viernes. Combos de día semana pueden nivelar el volumen.</span></div></li>
+      </ul>
+    </div>
+    <div class="pillar-card">
+      <div class="pillar-header"><div class="pillar-icon" style="background:rgba(5,135,104,0.12)">⚙️</div><div><div class="pillar-title">Operaciones</div><div class="pillar-subtitle">Correcciones que protegen el ranking</div></div></div>
+      <ul class="lever-list">
+        <li class="lever-item high"><span class="lever-icon">⭐</span><div class="lever-text"><strong>Reducir DR Altavista de 4.94% a &lt;1.2%</strong><span>El defect rate más alto de la red. Impacta calificación, recompra y posicionamiento.</span></div></li>
+        <li class="lever-item high"><span class="lever-icon">🕐</span><div class="lever-text"><strong>Disponibilidad Santa Fe al 98%+ (hoy 89.5%)</strong><span>La tienda más baja de la red. Cada punto de disponibilidad = órdenes directas.</span></div></li>
+        <li class="lever-item med"><span class="lever-icon">🍳</span><div class="lever-text"><strong>Cooking Time Condesa: 26 min → &lt;15 min</strong><span>El peor CT de la red. Impacta ATA y satisfacción del usuario directamente.</span></div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section-header">
+    <div class="section-num">5</div>
+    <h2>Plan de acción</h2>
+  </div>
+  <div class="roadmap">
+    <div class="roadmap-col"><div class="roadmap-col-header now">🔥 Inmediato (0–4 sem)</div><div class="roadmap-items">
+      <div class="roadmap-item"><strong>Ads Rappi Anatole + Condesa + Santa Fe</strong><span>Meta: recuperar +15% órdenes en tiendas caídas</span></div>
+      <div class="roadmap-item"><strong>Campaña reactivación L60D</strong><span>Meta: 100+ usuarios reactivados en primer mes</span></div>
+      <div class="roadmap-item"><strong>Disponibilidad Santa Fe a 95%+</strong><span>Auditar horarios y gaps de menú semanalmente</span></div>
+      <div class="roadmap-item"><strong>Plan correctivo DR Altavista</strong><span>Reducir de 4.94% a &lt;2% en 4 semanas</span></div>
+    </div></div>
+    <div class="roadmap-col"><div class="roadmap-col-header soon">⚡ Corto plazo (1–2 m)</div><div class="roadmap-items">
+      <div class="roadmap-item"><strong>Optimizar fotos y menú top-sellers</strong><span>Mejorar SST→ATC de 19% al 24%+ (benchmark 27%)</span></div>
+      <div class="roadmap-item"><strong>Combos midweek L-J</strong><span>Meta: +20% órdenes en días entre semana</span></div>
+      <div class="roadmap-item"><strong>RT Turbo &lt;5 min en todos los canales</strong><span>Anatole-Turbo (13 min) y Santa Fe (9.68 min) prioridad</span></div>
+      <div class="roadmap-item"><strong>Proteger base Prime (-24.9% en mayo)</strong><span>Programa de beneficios exclusivos para usuarios Prime</span></div>
+    </div></div>
+    <div class="roadmap-col"><div class="roadmap-col-header later">🎯 Mediano plazo (2–4 m)</div><div class="roadmap-items">
+      <div class="roadmap-item"><strong>Market Share 1.8% → 2.5%+</strong><span>Requiere ejecución consistente en todas las palancas</span></div>
+      <div class="roadmap-item"><strong>Usuarios retenidos &gt;40% del mix</strong><span>Hoy 31.6%. Programa de fidelidad post-pedido.</span></div>
+      <div class="roadmap-item"><strong>Cooking Time Condesa 26→15 min</strong><span>Revisión profunda del proceso operativo de cocina</span></div>
+      <div class="roadmap-item"><strong>Turbo = 15-20% del GMV total</strong><span>Con disponibilidad y RT corregidos, el canal escala</span></div>
+    </div></div>
+  </div>
+</main>
+</div><!-- end page resumen -->
+
+<!-- ═══════════════════ STORE PAGES TEMPLATE ═══════════════════ -->
+<!-- ANATOLE -->
+<div class="page" id="page-anatole">
+<main>
+  <div class="store-header-band">
+    <div>
+      <div class="shb-name">Tori Tori Anatole</div>
+      <div class="shb-sub">Store ID 10000818 · CDMX3 Polanco-Chapultepec · Mayor volumen de la red · Top Oro histórico</div>
+      <div class="shb-badges">
+        <span class="badge badge-red">▼ -30.2% órdenes</span>
+        <span class="badge badge-gold">1ª tienda por GMV (24.8%)</span>
+        <span class="badge badge-yellow">RT: 6.59 min ⚠</span>
+        <span class="badge badge-yellow">DR: 1.93% ⚠</span>
+      </div>
+    </div>
+    <div class="shb-kpis">
+      <div class="shb-kpi"><div class="shb-kpi-label">Órdenes mayo</div><div class="shb-kpi-value">263</div><div class="shb-kpi-delta d-neg">▼ -30.2% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Venta neta</div><div class="shb-kpi-value">$277K</div><div class="shb-kpi-delta d-neg">▼ -24.6% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">AOV</div><div class="shb-kpi-value">$1,054</div><div class="shb-kpi-delta d-pos">▲ +8.1% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">% GMV red</div><div class="shb-kpi-value">24.8%</div><div class="shb-kpi-delta d-warn">1ª sucursal</div></div>
+    </div>
+  </div>
+  <div class="chart-grid-2" style="margin-bottom:18px">
+    <div class="card"><div class="card-title">Tendencia mensual — Anatole</div><div class="card-subtitle">Órdenes y venta mayo 2025 → mayo 2026</div><div class="chart-wrap tall"><canvas id="c-anatole-trend"></canvas></div></div>
+    <div class="card"><div class="card-title">Alertas y diagnóstico</div><div class="card-subtitle">Acciones prioritarias para esta unidad</div>
+      <div class="alert-list">
+        <div class="al-item a-red"><span>🔴</span><div><strong>Caída -30% sin causa operativa clara</strong>Disponibilidad (98.5%) y DR (1.93%) están dentro de rango. La caída transversal en mayo apunta a pérdida de posicionamiento en el algoritmo Rappi. Acción inmediata: activar Ads Rappi en Polanco.</div></div>
+        <div class="al-item a-yellow"><span>🟡</span><div><strong>RT en tienda: 6.59 min (target &lt;3 min)</strong>Más del doble del límite. Impacta la asignación de repartidores en horas pico y reduce la probabilidad de que el courier acepte órdenes de esta tienda.</div></div>
+        <div class="al-item a-yellow"><span>🟡</span><div><strong>Defect Rate: 1.93% (límite 1.2%)</strong>Los defectos de mayo incluyen: wrong item en Donburi de Rib Eye, missing Nigiris Vegetarianos, item dañado (Pepino agrio). Revisar proceso de armado y validación pre-salida.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>Top Oro operativo — disponibilidad 98.5%</strong>Referente de la red en disponibilidad. El AOV subió +8.1% — el cliente de Anatole sigue gastando bien cuando llega. El problema es traer más clientes.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card"><div class="card-title">Métricas operativas vs target</div><div class="card-subtitle">Mayo 2026 · Objetivos Cuentas Nacionales</div>
+      <div class="ops-grid">
+        <div class="ops-row"><span class="ops-label">Disponibilidad</span><span class="ops-val" style="color:var(--green)">98.5%</span><span class="ops-tgt">Target 98%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:98.5%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Defect Rate</span><span class="ops-val" style="color:var(--yellow)">1.93%</span><span class="ops-tgt">Máx 1.2%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:55%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">RT en Tienda</span><span class="ops-val" style="color:var(--red)">6.59 min</span><span class="ops-tgt">Máx 3 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:78%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Cooking Time</span><span class="ops-val" style="color:var(--yellow)">16.85 min</span><span class="ops-tgt">Target 15 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:63%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Tiempo Total Entrega</span><span class="ops-val" style="color:var(--yellow)">42.58 min</span><span class="ops-tgt">Target 30 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:80%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">% Cancelaciones</span><span class="ops-val" style="color:var(--green)">0.36%</span><span class="ops-tgt">Máx 0.7%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:25%;background:var(--green)"></div></div></div>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">Top 5 productos — mayo 2026</div><div class="card-subtitle">Piezas vendidas y variación vs mes anterior</div>
+      <div class="product-list">
+        <div class="prod-row"><div class="prod-rank">1</div><div class="prod-name">Brocheta de Queso Manchego</div><div class="prod-vol">244 pzs</div><div class="prod-delta" style="color:var(--red)">-9.3%</div></div>
+        <div class="prod-row"><div class="prod-rank">2</div><div class="prod-name">Chirashi de Salmón Marinado</div><div class="prod-vol">204 pzs</div><div class="prod-delta" style="color:var(--red)">-13.9%</div></div>
+        <div class="prod-row"><div class="prod-rank">3</div><div class="prod-name">Chirashi de Atún Marinado</div><div class="prod-vol">111 pzs</div><div class="prod-delta" style="color:var(--green)">+0.9%</div></div>
+        <div class="prod-row"><div class="prod-rank">4</div><div class="prod-name">Yakimeshi Mixto</div><div class="prod-vol">101 pzs</div><div class="prod-delta" style="color:var(--red)">-35.3%</div></div>
+        <div class="prod-row"><div class="prod-rank">5</div><div class="prod-name">Rollo de Atún Spicy</div><div class="prod-vol">96 pzs</div><div class="prod-delta" style="color:var(--red)">-7.7%</div></div>
+        <div class="prod-row"><div class="prod-rank">6</div><div class="prod-name">Nigiri de Salmón</div><div class="prod-vol">77 pzs</div><div class="prod-delta" style="color:var(--red)">-44.2%</div></div>
+      </div>
+      <div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line)">
+        <div style="font-size:11px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px">Defectos registrados mayo</div>
+        <div class="defect-row"><div class="defect-type dt-wrong">Wrong</div><div class="defect-product">Donburi de Rib Eye — llegó pollo</div><div class="defect-date">04-may</div></div>
+        <div class="defect-row"><div class="defect-type dt-damaged">Dañado</div><div class="defect-product">Rollo de Pepino — sabía agrio</div><div class="defect-date">09-may</div></div>
+        <div class="defect-row"><div class="defect-type dt-missing">Missing</div><div class="defect-product">Nigiris Vegetarianos — no llegó</div><div class="defect-date">10-may</div></div>
+        <div class="defect-row"><div class="defect-type dt-wrong">Wrong</div><div class="defect-product">Chirashi Salmón — bowl diferente</div><div class="defect-date">20-may</div></div>
+        <div class="defect-row"><div class="defect-type dt-missing">Missing</div><div class="defect-product">Donburi de Salmón — ingredientes faltantes</div><div class="defect-date">29-may</div></div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- ALTAVISTA -->
+<div class="page" id="page-altavista">
+<main>
+  <div class="store-header-band band-critical">
+    <div>
+      <div class="shb-name">Tori Tori Altavista</div>
+      <div class="shb-sub">Store ID 10000822 · CDMX6 San Ángel-Barranca · 2ª tienda por venta · DR más alto de la red</div>
+      <div class="shb-badges">
+        <span class="badge badge-red">DR 4.94% — límite 1.2%</span>
+        <span class="badge badge-gold">AOV $1,283 — 2º más alto</span>
+        <span class="badge badge-yellow">-4.6% órdenes</span>
+        <span class="badge badge-green">Disponib. 99.2% ✓</span>
+      </div>
+    </div>
+    <div class="shb-kpis">
+      <div class="shb-kpi"><div class="shb-kpi-label">Órdenes mayo</div><div class="shb-kpi-value">165</div><div class="shb-kpi-delta d-neg">▼ -4.6% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Venta neta</div><div class="shb-kpi-value">$212K</div><div class="shb-kpi-delta d-pos">▲ +7.0% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">AOV</div><div class="shb-kpi-value">$1,283</div><div class="shb-kpi-delta d-pos">▲ +12.2% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">% GMV red</div><div class="shb-kpi-value">18.9%</div><div class="shb-kpi-delta d-warn">2ª sucursal</div></div>
+    </div>
+  </div>
+  <div class="chart-grid-2" style="margin-bottom:18px">
+    <div class="card"><div class="card-title">Tendencia mensual — Altavista</div><div class="card-subtitle">Órdenes y venta mayo 2025 → mayo 2026</div><div class="chart-wrap tall"><canvas id="c-altavista-trend"></canvas></div></div>
+    <div class="card"><div class="card-title">Alertas y diagnóstico</div><div class="card-subtitle">Acciones prioritarias para esta unidad</div>
+      <div class="alert-list">
+        <div class="al-item a-red"><span>🔴</span><div><strong>Defect Rate 4.94% — el más alto de toda la red</strong>4 veces el límite permitido. Mar-26 y may-26 acumularon 9 defectos c/u. Los meses con más tráfico (abr-26: 173 órdenes) generan más defectos. Auditoría urgente de proceso de armado de pedidos.</div></div>
+        <div class="al-item a-red"><span>🔴</span><div><strong>ATA 48.40 min — el 2º más alto de la red</strong>El cliente espera casi 50 minutos. Combina cooking time elevado (17.2 min) con zona geográfica complicada. Impacto directo en calificación y probabilidad de recompra.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>AOV de $1,283 — creciendo +12.2% MoM</strong>El ticket promedio es alto y sigue subiendo. El cliente de Altavista es premium y fiel. La oportunidad está en recuperar volumen sin perder ese posicionamiento de precio.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>Venta creció +7% a pesar de bajar en órdenes</strong>El AOV compensó la caída en volumen. Esto confirma que los usuarios habituales permanecen — el problema es adquisición y reactivación, no satisfacción del cliente existente.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card"><div class="card-title">Métricas operativas vs target</div><div class="card-subtitle">Mayo 2026</div>
+      <div class="ops-grid">
+        <div class="ops-row"><span class="ops-label">Disponibilidad</span><span class="ops-val" style="color:var(--green)">99.2%</span><span class="ops-tgt">Target 98%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:99%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Defect Rate</span><span class="ops-val" style="color:var(--red);font-weight:900">4.94%</span><span class="ops-tgt">Máx 1.2%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:100%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">RT en Tienda</span><span class="ops-val" style="color:var(--yellow)">3.86 min</span><span class="ops-tgt">Máx 3 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:44%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Cooking Time</span><span class="ops-val" style="color:var(--yellow)">17.20 min</span><span class="ops-tgt">Target 15 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:67%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Tiempo Total Entrega</span><span class="ops-val" style="color:var(--red)">48.40 min</span><span class="ops-tgt">Target 30 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:95%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Calificación operativa</span><span class="ops-val" style="color:var(--red)">Básico</span><span class="ops-tgt">Top Oro</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:30%;background:var(--red)"></div></div></div>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">Historial de defectos — últimos 5 meses</div><div class="card-subtitle">Altavista es la tienda con mayor acumulación de incidentes</div>
+      <table class="store-table" style="font-size:12px">
+        <thead><tr><th>Mes</th><th>Órdenes</th><th>Defectos</th><th>Missing</th><th>Wrong</th><th>DR%</th></tr></thead>
+        <tbody>
+          <tr><td>Ene-26</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+          <tr><td>Feb-26</td><td>131</td><td>5</td><td>3</td><td>—</td><td style="color:var(--red)">3.82%</td></tr>
+          <tr><td>Mar-26</td><td>147</td><td>9</td><td>7</td><td>—</td><td style="color:var(--red)">6.12%</td></tr>
+          <tr><td>Abr-26</td><td>173</td><td>7</td><td>4</td><td>—</td><td style="color:var(--red)">4.05%</td></tr>
+          <tr><td>May-26</td><td>165</td><td>9</td><td>4</td><td>—</td><td style="color:var(--red)">5.45%</td></tr>
+        </tbody>
+      </table>
+      <div class="al-item a-red" style="margin-top:14px"><span>🔴</span><div><strong>Patrón persistente: DR elevado desde feb-26</strong>No es un evento aislado — es un problema operativo estructural. Requiere capacitación del equipo de armado de pedidos y checklist de validación pre-salida.</div></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- CONDESA -->
+<div class="page" id="page-condesa">
+<main>
+  <div class="store-header-band band-critical">
+    <div>
+      <div class="shb-name">Tori Tori Condesa</div>
+      <div class="shb-sub">Store ID 10000820 · CDMX2 Condesa-Roma · Mayor caída absoluta en venta · CT más alto de la red</div>
+      <div class="shb-badges">
+        <span class="badge badge-red">▼ -33.6% órdenes</span>
+        <span class="badge badge-red">CT 26.4 min (target 15)</span>
+        <span class="badge badge-green">RT 0.91 min ✓</span>
+        <span class="badge badge-green">Disponib. 99.1% ✓</span>
+      </div>
+    </div>
+    <div class="shb-kpis">
+      <div class="shb-kpi"><div class="shb-kpi-label">Órdenes mayo</div><div class="shb-kpi-value">196</div><div class="shb-kpi-delta d-neg">▼ -33.6% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Venta neta</div><div class="shb-kpi-value">$188K</div><div class="shb-kpi-delta d-neg">▼ -34.0% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">AOV</div><div class="shb-kpi-value">$957</div><div class="shb-kpi-delta d-neg">▼ -0.7% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">% GMV red</div><div class="shb-kpi-value">16.8%</div><div class="shb-kpi-delta d-neg">3ª sucursal</div></div>
+    </div>
+  </div>
+  <div class="chart-grid-2" style="margin-bottom:18px">
+    <div class="card"><div class="card-title">Tendencia mensual — Condesa</div><div class="card-subtitle">Órdenes y venta mayo 2025 → mayo 2026</div><div class="chart-wrap tall"><canvas id="c-condesa-trend"></canvas></div></div>
+    <div class="card"><div class="card-title">Alertas y diagnóstico</div><div class="card-subtitle">Acciones prioritarias para esta unidad</div>
+      <div class="alert-list">
+        <div class="al-item a-red"><span>🔴</span><div><strong>Cooking Time: 26.4 min — el peor de toda la red</strong>Casi el doble del objetivo de 15 min. Eleva el ATA a 47 min. Impacta directamente la calificación y reduce la probabilidad de recompra. Requiere revisión del proceso de cocina.</div></div>
+        <div class="al-item a-red"><span>🔴</span><div><strong>Caída -33.6% en órdenes y -34% en venta</strong>La mayor caída absoluta en pesos de la red. El AOV no compensó (-0.7%). El problema es puro volumen. La zona Condesa-Roma tiene alta densidad competitiva.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>RT en tienda: 0.91 min — el mejor de la red</strong>Menos de 1 minuto de espera para el repartidor. Esta ventaja no se traduce en experiencia final porque el cooking time destruye el ATA total. Resolver CT desbloquea todo el potencial.</div></div>
+        <div class="al-item a-blue"><span>💡</span><div><strong>Zona Condesa-Roma: alta oportunidad de mercado</strong>La microzona CDMX2 tiene tráfico alto de usuarios jóvenes y urbanos. Con CT corregido y Ads activados, esta tienda puede recuperar y superar sus picos históricos.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card"><div class="card-title">Métricas operativas vs target</div><div class="card-subtitle">Mayo 2026</div>
+      <div class="ops-grid">
+        <div class="ops-row"><span class="ops-label">Disponibilidad</span><span class="ops-val" style="color:var(--green)">99.1%</span><span class="ops-tgt">Target 98%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:99%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Defect Rate</span><span class="ops-val" style="color:var(--green)">—</span><span class="ops-tgt">Máx 1.2%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:5%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">RT en Tienda</span><span class="ops-val" style="color:var(--green)">0.91 min</span><span class="ops-tgt">Máx 3 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:18%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Cooking Time</span><span class="ops-val" style="color:var(--red);font-weight:900">26.4 min</span><span class="ops-tgt">Target 15 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:100%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Tiempo Total Entrega</span><span class="ops-val" style="color:var(--red)">46.9 min</span><span class="ops-tgt">Target 30 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:93%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">% Cancelaciones</span><span class="ops-val" style="color:var(--green)">0%</span><span class="ops-tgt">Máx 0.7%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:2%;background:var(--green)"></div></div></div>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">Impacto del Cooking Time en el cliente</div><div class="card-subtitle">Cómo los 26 min de CT destruyen la experiencia</div>
+      <div class="insight-box" style="margin-bottom:14px">
+        <strong>🔍 El problema en números:</strong>
+        <p>Con un CT de 26.4 min y RT de 0.9 min, el ATA total es 46.9 min. La misma zona con CT de 15 min tendría un ATA de ~35 min — <strong>12 minutos menos</strong>, lo que cambia completamente el NPS y la recompra.</p>
+      </div>
+      <div class="metric-comparison">
+        <div class="mc-card"><div class="mc-label">Cooking Time actual</div><div class="mc-value" style="color:var(--red)">26.4 min</div><div class="mc-target">Target: 15 min</div><div class="mc-status" style="color:var(--red)">+11.4 min sobre target</div></div>
+        <div class="mc-card"><div class="mc-label">ATA actual</div><div class="mc-value" style="color:var(--red)">46.9 min</div><div class="mc-target">Target: 30 min</div><div class="mc-status" style="color:var(--red)">+16.9 min</div></div>
+        <div class="mc-card"><div class="mc-label">ATA con CT corregido</div><div class="mc-value" style="color:var(--green)">~35 min</div><div class="mc-target">Estimado</div><div class="mc-status" style="color:var(--green)">-12 min de mejora</div></div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- LOMAS -->
+<div class="page" id="page-lomas">
+<main>
+  <div class="store-header-band">
+    <div>
+      <div class="shb-name">Tori Tori Lomas</div>
+      <div class="shb-sub">Store ID 1306703609 · CDMX3 Las Lomas · AOV más alto de la red · Zona premium</div>
+      <div class="shb-badges">
+        <span class="badge badge-yellow">▼ -1.9% órdenes</span>
+        <span class="badge badge-gold">AOV $1,441 — récord red</span>
+        <span class="badge badge-green">Venta +16.9% ▲</span>
+        <span class="badge badge-red">RT 8.01 min ⚠</span>
+      </div>
+    </div>
+    <div class="shb-kpis">
+      <div class="shb-kpi"><div class="shb-kpi-label">Órdenes mayo</div><div class="shb-kpi-value">102</div><div class="shb-kpi-delta d-warn">▼ -1.9% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Venta neta</div><div class="shb-kpi-value">$147K</div><div class="shb-kpi-delta d-pos">▲ +16.9% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">AOV</div><div class="shb-kpi-value">$1,441</div><div class="shb-kpi-delta d-pos">▲ +19.2% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">% GMV red</div><div class="shb-kpi-value">13.2%</div><div class="shb-kpi-delta d-pos">4ª sucursal</div></div>
+    </div>
+  </div>
+  <div class="chart-grid-2" style="margin-bottom:18px">
+    <div class="card"><div class="card-title">Tendencia mensual — Lomas</div><div class="card-subtitle">Órdenes y venta mayo 2025 → mayo 2026</div><div class="chart-wrap tall"><canvas id="c-lomas-trend"></canvas></div></div>
+    <div class="card"><div class="card-title">Alertas y diagnóstico</div><div class="card-subtitle">Acciones prioritarias para esta unidad</div>
+      <div class="alert-list">
+        <div class="al-item a-green"><span>✅</span><div><strong>Venta +16.9% con órdenes casi sin cambio (-1.9%)</strong>El AOV subió +19.2% hasta $1,441 — el más alto de toda la red. Los clientes de Lomas están pidiendo más por pedido. Hay oportunidad de aumentar frecuencia con la base existente.</div></div>
+        <div class="al-item a-red"><span>🔴</span><div><strong>RT en tienda: 8.01 min — 2º peor entre tiendas regulares</strong>Más de 8 minutos de espera. Esto puede derivar en penalizaciones de ranking en Rappi. Riesgo de que los couriers rechacen órdenes de esta tienda en horas pico.</div></div>
+        <div class="al-item a-yellow"><span>🟡</span><div><strong>Disponibilidad al 95.1% (target 98%)</strong>Los 2.9 puntos de brecha representan ~30 órdenes potenciales perdidas al mes. Auditar horarios de apertura y cierres anticipados de menú.</div></div>
+        <div class="al-item a-yellow"><span>🟡</span><div><strong>DR 2.97% (límite 1.2%) — segunda vez que supera el límite</strong>Con un ticket tan alto, un defecto tiene mayor impacto en compensación y en la percepción del cliente premium. Revisar checklist de calidad específico para esta tienda.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card"><div class="card-title">Métricas operativas vs target</div><div class="card-subtitle">Mayo 2026</div>
+      <div class="ops-grid">
+        <div class="ops-row"><span class="ops-label">Disponibilidad</span><span class="ops-val" style="color:var(--yellow)">95.1%</span><span class="ops-tgt">Target 98%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:95%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Defect Rate</span><span class="ops-val" style="color:var(--yellow)">2.97%</span><span class="ops-tgt">Máx 1.2%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:70%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">RT en Tienda</span><span class="ops-val" style="color:var(--red)">8.01 min</span><span class="ops-tgt">Máx 3 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:88%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Cooking Time</span><span class="ops-val" style="color:var(--yellow)">17.84 min</span><span class="ops-tgt">Target 15 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:68%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Tiempo Total Entrega</span><span class="ops-val" style="color:var(--yellow)">44.71 min</span><span class="ops-tgt">Target 30 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:87%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Calificación operativa</span><span class="ops-val" style="color:var(--red)">Básico</span><span class="ops-tgt">Top Oro</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:30%;background:var(--red)"></div></div></div>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">Potencial de crecimiento — Lomas</div><div class="card-subtitle">Con el AOV más alto, pequeñas mejoras tienen gran impacto</div>
+      <div class="insight-box" style="margin-bottom:14px">
+        <strong>💡 El potencial en números:</strong>
+        <p>Si Lomas alcanza la disponibilidad de Anatole (98.5%) y reduce RT a &lt;3 min, podría pasar de 102 a ~120 órdenes mensuales. Con AOV de $1,441, eso representa <strong>+$25,000 MXN adicionales/mes</strong> sin cambiar nada más.</p>
+      </div>
+      <div class="metric-comparison">
+        <div class="mc-card"><div class="mc-label">AOV actual</div><div class="mc-value" style="color:var(--green)">$1,441</div><div class="mc-target">Más alto de la red</div><div class="mc-status" style="color:var(--green)">+27% vs promedio</div></div>
+        <div class="mc-card"><div class="mc-label">Órdenes actuales</div><div class="mc-value" style="color:var(--yellow)">102</div><div class="mc-target">Con +98% disponib.</div><div class="mc-status" style="color:var(--yellow)">Potencial ~120</div></div>
+        <div class="mc-card"><div class="mc-label">Impacto potencial</div><div class="mc-value" style="color:var(--green)">+$25K</div><div class="mc-target">Por mes estimado</div><div class="mc-status" style="color:var(--green)">Solo con ops</div></div>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- SANTA FE -->
+<div class="page" id="page-santafe">
+<main>
+  <div class="store-header-band band-critical">
+    <div>
+      <div class="shb-name">Tori Tori Santa Fe</div>
+      <div class="shb-sub">Store ID 1923219533 · CDMX3 Santa Fe Sur · Disponibilidad crítica + RT elevado</div>
+      <div class="shb-badges">
+        <span class="badge badge-red">Disponib. 89.5% — más baja red</span>
+        <span class="badge badge-red">RT 9.68 min ⚠</span>
+        <span class="badge badge-red">▼ -29.6% órdenes</span>
+        <span class="badge badge-green">DR 1.01% ✓</span>
+      </div>
+    </div>
+    <div class="shb-kpis">
+      <div class="shb-kpi"><div class="shb-kpi-label">Órdenes mayo</div><div class="shb-kpi-value">100</div><div class="shb-kpi-delta d-neg">▼ -29.6% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Venta neta</div><div class="shb-kpi-value">$127K</div><div class="shb-kpi-delta d-neg">▼ -27.2% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">AOV</div><div class="shb-kpi-value">$1,274</div><div class="shb-kpi-delta d-pos">▲ +3.4% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">% GMV red</div><div class="shb-kpi-value">11.4%</div><div class="shb-kpi-delta d-neg">5ª sucursal</div></div>
+    </div>
+  </div>
+  <div class="chart-grid-2" style="margin-bottom:18px">
+    <div class="card"><div class="card-title">Tendencia mensual — Santa Fe</div><div class="card-subtitle">Órdenes y venta mayo 2025 → mayo 2026</div><div class="chart-wrap tall"><canvas id="c-santafe-trend"></canvas></div></div>
+    <div class="card"><div class="card-title">Alertas y diagnóstico</div><div class="card-subtitle">Acciones prioritarias para esta unidad</div>
+      <div class="alert-list">
+        <div class="al-item a-red"><span>🔴</span><div><strong>Disponibilidad 89.5% — la más baja de la red</strong>1 de cada 10 veces que un usuario intenta ordenar, la tienda está cerrada. Esto reduce directamente las órdenes y penaliza el posicionamiento en el algoritmo de Rappi. Auditar horarios esta semana.</div></div>
+        <div class="al-item a-red"><span>🔴</span><div><strong>RT en tienda: 9.68 min — 2º peor de la red</strong>Combinado con disponibilidad baja, esta tienda tiene dos razones estructurales para recibir menos visibilidad de Rappi. El courier espera casi 10 minutos — muy por encima del límite de 3.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>Defect Rate 1.01% — bajo el límite de 1.2%</strong>La calidad del pedido es buena. El problema es 100% operativo-logístico, no de producto. Esto hace la recuperación más factible — no hay que cambiar el producto, solo la operación.</div></div>
+        <div class="al-item a-yellow"><span>🟡</span><div><strong>AOV de $1,274 — potencial si se recupera volumen</strong>El cliente que llega gasta bien. Con disponibilidad corregida, el impacto en venta sería inmediato. Estimado: cada punto de disponibilidad recuperado = ~15 órdenes adicionales/mes.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card"><div class="card-title">Métricas operativas vs target</div><div class="card-subtitle">Mayo 2026</div>
+      <div class="ops-grid">
+        <div class="ops-row"><span class="ops-label">Disponibilidad</span><span class="ops-val" style="color:var(--red);font-weight:900">89.5%</span><span class="ops-tgt">Target 98%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:89%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Defect Rate</span><span class="ops-val" style="color:var(--green)">1.01%</span><span class="ops-tgt">Máx 1.2%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:30%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">RT en Tienda</span><span class="ops-val" style="color:var(--red)">9.68 min</span><span class="ops-tgt">Máx 3 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:96%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Cooking Time</span><span class="ops-val" style="color:var(--yellow)">16.92 min</span><span class="ops-tgt">Target 15 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:65%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Tiempo Total Entrega</span><span class="ops-val" style="color:var(--red)">47.88 min</span><span class="ops-tgt">Target 30 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:95%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Calificación operativa</span><span class="ops-val" style="color:var(--yellow)">Top Plata</span><span class="ops-tgt">Top Oro</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:60%;background:var(--yellow)"></div></div></div>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">Diagnóstico de disponibilidad</div><div class="card-subtitle">Causas probables y acciones correctivas</div>
+      <div class="al-item a-red" style="margin-bottom:9px"><span>🔴</span><div><strong>10.5% del tiempo la tienda está cerrada</strong>En un mes de 720 horas de operación potencial, Santa Fe estuvo cerrada ~76 horas. Identificar si son cierres voluntarios (personal), técnicos (tablet) o de menú (productos agotados).</div></div>
+      <div class="al-item a-yellow" style="margin-bottom:9px"><span>🟡</span><div><strong>Bad Orders por disponibilidad — feb a mayo</strong>Santa Fe registró cancelaciones por subcategoría "Delay in Store" y "Store Closed". Esto confirma que hay cierres no planificados que están generando cancelaciones directas.</div></div>
+      <div class="al-item a-blue"><span>💡</span><div><strong>Plan correctivo semana 1: auditoría de horarios</strong>Mapear exactamente en qué días y horas cierra la tienda antes del horario oficial. Con ese dato se puede determinar si es un problema de personal, abasto o técnico.</div></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- DURAZNOS -->
+<div class="page" id="page-duraznos">
+<main>
+  <div class="store-header-band band-green">
+    <div>
+      <div class="shb-name">🌟 Tori Tori Duraznos</div>
+      <div class="shb-sub">Store ID 1923290756 · CDMX3 Lomas Altas-Bosques · Única tienda en crecimiento · Modelo a replicar</div>
+      <div class="shb-badges">
+        <span class="badge badge-green">▲ +35.2% órdenes</span>
+        <span class="badge badge-green">▲ +34.8% venta</span>
+        <span class="badge" style="background:rgba(232,212,172,0.2);color:#E8D4AC;border-color:#E8D4AC">Referencia positiva de la red</span>
+      </div>
+    </div>
+    <div class="shb-kpis">
+      <div class="shb-kpi"><div class="shb-kpi-label">Órdenes mayo</div><div class="shb-kpi-value">96</div><div class="shb-kpi-delta d-pos">▲ +35.2% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Venta neta</div><div class="shb-kpi-value">$110K</div><div class="shb-kpi-delta d-pos">▲ +34.8% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">AOV</div><div class="shb-kpi-value">$1,144</div><div class="shb-kpi-delta d-warn">▼ -0.3% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">% GMV red</div><div class="shb-kpi-value">9.8%</div><div class="shb-kpi-delta d-pos">↑ Subiendo</div></div>
+    </div>
+  </div>
+  <div class="chart-grid-2" style="margin-bottom:18px">
+    <div class="card"><div class="card-title">Tendencia mensual — Duraznos</div><div class="card-subtitle">La única tienda con crecimiento sostenido en mayo</div><div class="chart-wrap tall"><canvas id="c-duraznos-trend"></canvas></div></div>
+    <div class="card"><div class="card-title">¿Por qué está creciendo Duraznos?</div><div class="card-subtitle">Claves del desempeño positivo en un mes adverso para la red</div>
+      <div class="alert-list">
+        <div class="al-item a-green"><span>✅</span><div><strong>+35% en órdenes cuando toda la red cayó</strong>En el mismo mes que Condesa perdió -34% y Anatole -30%, Duraznos creció +35%. Esto elimina el "factor de mercado" como causa — hay algo específico que está funcionando aquí.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>Defect Rate limpio — sin quejas en mayo</strong>Sin defectos registrados. La calidad del pedido es consistente. Esto facilita la recompra orgánica y mejora la calificación de la tienda en el algoritmo.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>Zona Lomas Altas-Bosques: penetración creciente</strong>La microzona está ganando usuarios activos. El crecimiento puede estar relacionado con menor competencia directa de Sushi premium en la zona vs Condesa o Polanco.</div></div>
+        <div class="al-item a-yellow"><span>🟡</span><div><strong>ATA 49.77 min — la más alta de la red</strong>A pesar del crecimiento, el tiempo de entrega es el más largo. Si se corrige cooking time y RT, Duraznos tiene potencial de ser Top 3 de la red en volumen.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card"><div class="card-title">Métricas operativas vs target</div><div class="card-subtitle">Mayo 2026</div>
+      <div class="ops-grid">
+        <div class="ops-row"><span class="ops-label">Disponibilidad</span><span class="ops-val" style="color:var(--yellow)">96.7%</span><span class="ops-tgt">Target 98%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:96%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Defect Rate</span><span class="ops-val" style="color:var(--green)">—</span><span class="ops-tgt">Máx 1.2%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:3%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">RT en Tienda</span><span class="ops-val" style="color:var(--yellow)">5.88 min</span><span class="ops-tgt">Máx 3 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:65%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Cooking Time</span><span class="ops-val" style="color:var(--yellow)">16.92 min</span><span class="ops-tgt">Target 15 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:65%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Tiempo Total Entrega</span><span class="ops-val" style="color:var(--red)">49.77 min</span><span class="ops-tgt">Target 30 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:99%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Calificación operativa</span><span class="ops-val" style="color:var(--yellow)">Básico</span><span class="ops-tgt">Top Oro</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:30%;background:var(--yellow)"></div></div></div>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">Potencial de Duraznos como tienda Top 3</div><div class="card-subtitle">Plan para escalar el crecimiento</div>
+      <div class="metric-comparison" style="margin-bottom:14px">
+        <div class="mc-card"><div class="mc-label">Órdenes mayo</div><div class="mc-value" style="color:var(--green)">96</div><div class="mc-target">+35% MoM</div><div class="mc-status" style="color:var(--green)">Tendencia ▲</div></div>
+        <div class="mc-card"><div class="mc-label">Potencial con ops</div><div class="mc-value" style="color:var(--green)">~130</div><div class="mc-target">+35% adicional</div><div class="mc-status" style="color:var(--green)">Disp. 98% + RT</div></div>
+        <div class="mc-card"><div class="mc-label">Venta potencial</div><div class="mc-value" style="color:var(--green)">~$149K</div><div class="mc-target">Estimado</div><div class="mc-status" style="color:var(--green)">+$39K/mes</div></div>
+      </div>
+      <div class="al-item a-blue"><span>💡</span><div><strong>Acciones para escalar el crecimiento:</strong><br>1. Disponibilidad 96.7% → 98%+ (+15 órdenes est.)<br>2. RT en tienda 5.88 → &lt;3 min (mejor asignación couriers)<br>3. Mantener DR limpio como activo estratégico<br>4. Activar Ads Rappi para capturar demanda creciente de la zona</div></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- SATÉLITE -->
+<div class="page" id="page-satelite">
+<main>
+  <div class="store-header-band band-critical">
+    <div>
+      <div class="shb-name">Tori Tori Satélite</div>
+      <div class="shb-sub">Store ID 1930040508 · CDMX5 Satélite · Caída más severa de la red · Viabilidad en revisión</div>
+      <div class="shb-badges">
+        <span class="badge badge-red">▼ -56.8% órdenes</span>
+        <span class="badge badge-red">Solo 16 órdenes en mayo</span>
+        <span class="badge badge-green">Ops limpia — no es el problema</span>
+      </div>
+    </div>
+    <div class="shb-kpis">
+      <div class="shb-kpi"><div class="shb-kpi-label">Órdenes mayo</div><div class="shb-kpi-value">16</div><div class="shb-kpi-delta d-neg">▼ -56.8% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Venta neta</div><div class="shb-kpi-value">$14K</div><div class="shb-kpi-delta d-neg">▼ -63.6% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">AOV</div><div class="shb-kpi-value">$886</div><div class="shb-kpi-delta d-neg">▼ -15.8% vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">% GMV red</div><div class="shb-kpi-value">1.3%</div><div class="shb-kpi-delta d-neg">Mínimo histórico</div></div>
+    </div>
+  </div>
+  <div class="chart-grid-2" style="margin-bottom:18px">
+    <div class="card"><div class="card-title">Tendencia mensual — Satélite</div><div class="card-subtitle">La caída se acelera desde febrero — requiere decisión estratégica</div><div class="chart-wrap tall"><canvas id="c-satelite-trend"></canvas></div></div>
+    <div class="card"><div class="card-title">Diagnóstico crítico</div><div class="card-subtitle">Análisis de viabilidad del punto de venta</div>
+      <div class="alert-list">
+        <div class="al-item a-red"><span>🔴</span><div><strong>16 órdenes en mayo — umbral de viabilidad</strong>Con solo 16 órdenes mensuales, el costo-beneficio del punto de venta en Rappi está en cuestión. La tienda no tiene escala suficiente para justificar la gestión activa de la cuenta en esa zona.</div></div>
+        <div class="al-item a-red"><span>🔴</span><div><strong>AOV $886 — el más bajo de tiendas regulares</strong>El cliente de Satélite gasta 22% menos que el promedio de la red ($1,134). La zona puede no ser el target natural de Tori Tori — el posicionamiento premium puede no resonar con el perfil de esa microzona.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>Operativamente limpia: RT 0.65 min, CT 12.8 min</strong>La tienda funciona bien operativamente. El problema no es de ejecución — es de demanda y fit de producto con la zona. No cerrar el punto antes de diagnosticar causas de demanda.</div></div>
+        <div class="al-item a-yellow"><span>🟡</span><div><strong>Recomendación: conversación estratégica con el aliado</strong>Evaluar si Satélite tiene viabilidad a mediano plazo en Rappi, o si los recursos deben redirigirse a fortalecer las tiendas con mayor potencial (Duraznos, Lomas).</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card"><div class="card-title">Métricas operativas vs target</div><div class="card-subtitle">Mayo 2026 — La operación está bien, el problema es de demanda</div>
+      <div class="ops-grid">
+        <div class="ops-row"><span class="ops-label">Disponibilidad</span><span class="ops-val" style="color:var(--yellow)">95.9%</span><span class="ops-tgt">Target 98%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:95%;background:var(--yellow)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Defect Rate</span><span class="ops-val" style="color:var(--green)">—</span><span class="ops-tgt">Máx 1.2%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:3%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">RT en Tienda</span><span class="ops-val" style="color:var(--green)">0.65 min</span><span class="ops-tgt">Máx 3 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:15%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Cooking Time</span><span class="ops-val" style="color:var(--green)">12.8 min</span><span class="ops-tgt">Target 15 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:52%;background:var(--green)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Tiempo Total Entrega</span><span class="ops-val" style="color:var(--red)">48.0 min</span><span class="ops-tgt">Target 30 min</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:95%;background:var(--red)"></div></div></div>
+        <div class="ops-row"><span class="ops-label">Cancelaciones</span><span class="ops-val" style="color:var(--green)">0%</span><span class="ops-tgt">Máx 0.7%</span><div class="ops-bar-wrap"><div class="ops-bar" style="width:2%;background:var(--green)"></div></div></div>
+      </div>
+    </div>
+    <div class="card"><div class="card-title">Comparativa vs misma tienda histórico</div><div class="card-subtitle">Satélite llegó a operar bien — ¿qué cambió?</div>
+      <table class="store-table" style="font-size:12px">
+        <thead><tr><th>Mes</th><th>Órdenes</th><th>Venta</th><th>AOV</th><th>Variación</th></tr></thead>
+        <tbody>
+          <tr><td>Ene-26</td><td>62</td><td>$66K</td><td>$1,065</td><td style="color:var(--green)">▲</td></tr>
+          <tr><td>Feb-26</td><td>56</td><td>$60K</td><td>$1,071</td><td style="color:var(--yellow)">—</td></tr>
+          <tr><td>Mar-26</td><td>86</td><td>$94K</td><td>$1,093</td><td style="color:var(--green)">▲</td></tr>
+          <tr><td>Abr-26</td><td>37</td><td>$39K</td><td>$1,054</td><td style="color:var(--red)">▼ -57%</td></tr>
+          <tr><td>May-26</td><td>16</td><td>$14K</td><td>$886</td><td style="color:var(--red)">▼ -57%</td></tr>
+        </tbody>
+      </table>
+      <div class="al-item a-yellow" style="margin-top:12px"><span>🟡</span><div><strong>La caída comenzó en abril — no es gradual</strong>En marzo tenía 86 órdenes (nivel razonable). La caída brusca de abril a mayo sugiere un evento específico — pérdida de visibilidad en app, cambio de zona de delivery, o algo en la categoría. Investigar trigger específico.</div></div>
+    </div>
+  </div>
+</main>
+</div>
+
+<!-- TURBO -->
+<div class="page" id="page-turbo">
+<main>
+  <div class="store-header-band">
+    <div>
+      <div class="shb-name">⚡ Canales Turbo</div>
+      <div class="shb-sub">5 puntos activos: Condesa · Altavista · Anatole · Satélite · Santa Fe (nueva apertura) · Canal en construcción</div>
+      <div class="shb-badges">
+        <span class="badge badge-blue">Canal en crecimiento</span>
+        <span class="badge badge-red">RT en tienda crítico (7–13 min)</span>
+        <span class="badge badge-yellow">Disponibilidad 77–94%</span>
+        <span class="badge badge-green">Potencial 15–20% GMV</span>
+      </div>
+    </div>
+    <div class="shb-kpis">
+      <div class="shb-kpi"><div class="shb-kpi-label">Órdenes totales</div><div class="shb-kpi-value">47</div><div class="shb-kpi-delta d-pos">↑ Creciendo</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Venta total</div><div class="shb-kpi-value">$42K</div><div class="shb-kpi-delta d-pos">↑ vs Abr</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Mayor problema</div><div class="shb-kpi-value">RT</div><div class="shb-kpi-delta d-neg">7–13 min</div></div>
+      <div class="shb-kpi"><div class="shb-kpi-label">Peor disponib.</div><div class="shb-kpi-value">77.4%</div><div class="shb-kpi-delta d-neg">Condesa-T</div></div>
+    </div>
+  </div>
+  <div class="chart-grid-2" style="margin-bottom:18px">
+    <div class="card"><div class="card-title">Tendencia del canal Turbo</div><div class="card-subtitle">Crecimiento desde cero — Turbo como canal nuevo mayo 2025 → mayo 2026</div><div class="chart-wrap tall"><canvas id="c-turbo-trend"></canvas></div></div>
+    <div class="card"><div class="card-title">El problema central: RT destruye la propuesta Turbo</div><div class="card-subtitle">Un canal Turbo con 13 min de RT no es Turbo</div>
+      <div class="alert-list">
+        <div class="al-item a-red"><span>🔴</span><div><strong>Anatole Turbo: 13.26 min de RT en tienda</strong>La propuesta de valor de Turbo es velocidad. Un repartidor esperando 13 minutos en tienda elimina completamente esa ventaja. El usuario recibe el mismo tiempo que en el canal regular.</div></div>
+        <div class="al-item a-red"><span>🔴</span><div><strong>Condesa Turbo: disponibilidad 77.4%</strong>Solo disponible 3 de cada 4 intentos. Esto penaliza el ranking del canal Turbo en la app y reduce la asignación de visibilidad. El canal no puede escalar con esa disponibilidad.</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>Satélite Turbo: RT de 3.14 min — el único en target</strong>Modelo a replicar. Anatole, Condesa y Santa Fe deben aprender de este proceso. ¿Qué hace diferente esta operación?</div></div>
+        <div class="al-item a-green"><span>✅</span><div><strong>Anatole y Altavista Turbo: +800% MoM</strong>Crecimiento exponencial desde base pequeña. Con RT corregido, estos canales pueden escalar significativamente en los próximos 2-3 meses.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="margin-bottom:18px">
+    <div class="card-title" style="margin-bottom:14px">Estado completo por canal Turbo — mayo 2026</div>
+    <table class="store-table">
+      <thead><tr><th>Canal Turbo</th><th>Store ID</th><th>Órdenes</th><th>% vs LM</th><th>Venta</th><th>AOV</th><th>Disponib.</th><th>RT Tienda</th><th>ATA</th><th>Status</th></tr></thead>
+      <tbody>
+        <tr><td>Anatole Turbo</td><td>1930377332</td><td>18</td><td style="color:var(--green)">+800%</td><td>$18,339</td><td>$1,019</td><td style="color:var(--yellow)">92.4%</td><td style="color:var(--red)">13.26 min</td><td>28.0</td><td><span class="badge badge-red">RT crítico</span></td></tr>
+        <tr><td>Condesa Turbo</td><td>1930371348</td><td>16</td><td style="color:var(--red)">-38.5%</td><td>$13,549</td><td>$847</td><td style="color:var(--red)">91.2%</td><td style="color:var(--yellow)">7.70 min</td><td>23.9</td><td><span class="badge badge-yellow">Disponib.</span></td></tr>
+        <tr><td>Altavista Turbo</td><td>1930371349</td><td>9</td><td style="color:var(--green)">+800%</td><td>$8,159</td><td>$907</td><td style="color:var(--yellow)">94.5%</td><td style="color:var(--yellow)">7.00 min</td><td>27.4</td><td><span class="badge badge-yellow">RT elevado</span></td></tr>
+        <tr><td>Satélite Turbo</td><td>1930371355</td><td>3</td><td style="color:var(--green)">+50%</td><td>$1,964</td><td>$655</td><td style="color:var(--yellow)">93.4%</td><td style="color:var(--green)">3.14 min</td><td>31.3</td><td><span class="badge badge-green">Modelo ✓</span></td></tr>
+        <tr><td>Santa Fe Turbo</td><td>1930371385</td><td>1</td><td>—</td><td>$578</td><td>$578</td><td style="color:var(--red)">0%*</td><td>—</td><td>—</td><td><span class="badge badge-blue">Recién abierto</span></td></tr>
+      </tbody>
+    </table>
+    <p style="font-size:11px;color:var(--muted);margin-top:8px;padding-left:4px;">*Santa Fe Turbo abrió en mayo 2026. La disponibilidad histórica es 0% por ser el mes de apertura.</p>
+  </div>
+  <div class="chart-grid-2">
+    <div class="card"><div class="card-title">Roadmap Turbo — hacia 15% del GMV</div><div class="card-subtitle">Plan para convertir el canal en motor de crecimiento H2 2026</div>
+      <div class="al-item a-red" style="margin-bottom:9px"><span>Sem 1–2</span><div><strong>Proceso de pickup dedicado en Anatole Turbo</strong><span style="color:var(--muted);font-size:12px">Reducir RT de 13.26 a &lt;5 min. Señalización específica para couriers Turbo. Modelo: replicar lo que hace Satélite-T.</span></div></div>
+      <div class="al-item a-yellow" style="margin-bottom:9px"><span>Sem 2–4</span><div><strong>Disponibilidad Condesa Turbo a 95%+</strong><span style="color:var(--muted);font-size:12px">Auditar horarios y gaps de menú. De 77.4% a 95%+ = ~20 órdenes adicionales/mes.</span></div></div>
+      <div class="al-item a-blue" style="margin-bottom:9px"><span>Mes 2</span><div><strong>Estandarizar proceso Satélite-T en todos los canales</strong><span style="color:var(--muted);font-size:12px">El único canal en target en RT. Mapear su proceso y replicarlo en Anatole, Altavista y Condesa.</span></div></div>
+      <div class="al-item a-green"><span>Mes 3–4</span><div><strong>Meta: 150+ órdenes Turbo / mes</strong><span style="color:var(--muted);font-size:12px">Con ops corregidas y Santa Fe Turbo activa, el canal puede representar 12-15% del GMV total de la cuenta.</span></div></div>
+    </div>
+    <div class="card"><div class="card-title">Potencial del canal Turbo</div><div class="card-subtitle">Proyección con mejoras operativas ejecutadas</div>
+      <div class="metric-comparison">
+        <div class="mc-card"><div class="mc-label">Órdenes Turbo actuales</div><div class="mc-value" style="color:var(--yellow)">47</div><div class="mc-target">Mayo 2026</div><div class="mc-status" style="color:var(--yellow)">4.8% del total</div></div>
+        <div class="mc-card"><div class="mc-label">Con ops corregidas</div><div class="mc-value" style="color:var(--green)">~150</div><div class="mc-target">Estimado mes 4</div><div class="mc-status" style="color:var(--green)">+220% de crecimiento</div></div>
+        <div class="mc-card"><div class="mc-label">% GMV potencial</div><div class="mc-value" style="color:var(--green)">12-15%</div><div class="mc-target">Objetivo H2 2026</div><div class="mc-status" style="color:var(--green)">Hoy 3.8%</div></div>
+      </div>
+      <div class="insight-box" style="margin-top:14px">
+        <strong>💡 El canal Turbo es la mayor oportunidad de crecimiento no aprovechada:</strong>
+        <p>5 puntos activos, infraestructura lista, demanda latente demostrada. El único obstáculo es operativo: RT y disponibilidad. Estas son las correcciones más rápidas de ejecutar de todo el plan.</p>
+      </div>
+    </div>
+  </div>
+</main>
+</div>
+
+<footer>
+  <span>Business Review Tori Tori × Rappi MX · Periodo: Mayo 2025 — Mayo 2026 · Datos: X-Rays Dashboard, Global Rest Acumulado, Ops MX Comercial, Business Review MX</span>
+  <span>KAM: mariana.palacios@rappi.com · Brand ID 1098 & 656149 · 12 puntos de venta · CDMX</span>
+</footer>
+
+<script>
+Chart.defaults.color = '#6F6460';
+Chart.defaults.borderColor = 'rgba(255,68,31,0.10)';
+Chart.defaults.font.family = "'Manrope', sans-serif";
+Chart.defaults.font.size = 11;
+
+const months = ['May-25','Jun-25','Jul-25','Ago-25','Sep-25','Oct-25','Nov-25','Dic-25','Ene-26','Feb-26','Mar-26','Abr-26','May-26'];
+const chartsRendered = {};
+
+// ── TAB SWITCHING ──
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const btn = [...document.querySelectorAll('.tab-btn')].find(b => b.getAttribute('onclick').includes("'"+id+"'"));
+  if (btn) btn.classList.add('active');
+  window.scrollTo({top: 0, behavior: 'smooth'});
+  if (!chartsRendered[id]) { renderPageCharts(id); chartsRendered[id] = true; }
+}
+
+function mkGrad(ctx, color) {
+  const g = ctx.createLinearGradient(0,0,0,270);
+  g.addColorStop(0, color.replace(')',',0.35)').replace('rgb','rgba'));
+  g.addColorStop(1, color.replace(')',',0)').replace('rgb','rgba'));
+  return g;
+}
+
+function storeTrendChart(canvasId, orders, sales) {
+  const el = document.getElementById(canvasId);
+  if (!el) return;
+  new Chart(el, {
+    type: 'bar',
+    data: {
+      labels: months,
+      datasets: [
+        { label: 'Órdenes', data: orders, backgroundColor: 'rgba(255,68,31,0.55)', borderColor: '#FF441F', borderWidth: 1, borderRadius: 4, yAxisID: 'y' },
+        { label: 'Venta MXN', data: sales, type: 'line', borderColor: '#FF441F', backgroundColor: 'rgba(255,68,31,0.08)', fill: true, tension: 0.35, pointRadius: 3, yAxisID: 'y1' }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      plugins: { legend: { position: 'top', labels: { boxWidth: 12, padding: 14 } } },
+      scales: {
+        y: { position: 'left', grid: { color: 'rgba(255,68,31,0.07)' }, title: { display: true, text: 'Órdenes', color: '#D9361E', font: { size: 10 } } },
+        y1: { position: 'right', grid: { display: false }, ticks: { callback: v => '$' + (v >= 1000000 ? (v/1000000).toFixed(1)+'M' : (v/1000).toFixed(0)+'K') }, title: { display: true, text: 'Venta', color: '#FF441F', font: { size: 10 } } },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+}
+
+function renderPageCharts(id) {
+  const data = {
+    anatole:  { o:[268,206,308,310,265,137,154,190,187,180,319,377,263], s:[326000,242000,395000,390000,307000,150000,165000,227000,237000,220000,380000,370000,277000] },
+    altavista:{ o:[130,98,155,165,140,60,75,110,115,105,165,173,165],    s:[163000,125000,196000,207000,172000,72000,95000,134000,147000,135000,215000,198000,212000] },
+    condesa:  { o:[205,180,260,270,220,90,105,155,160,140,235,295,196],  s:[225000,193000,295000,296000,236000,94000,117000,169000,172000,155000,271000,284000,188000] },
+    lomas:    { o:[90,75,100,105,90,36,45,68,72,68,98,104,102],          s:[113000,93000,125000,131000,112000,44000,56000,85000,91000,84000,120000,126000,147000] },
+    santafe:  { o:[95,80,115,120,100,38,48,72,76,70,104,142,100],        s:[116000,96000,144000,149000,121000,46000,59000,90000,95000,87000,126000,175000,127000] },
+    duraznos: { o:[55,42,68,72,60,22,28,42,45,40,65,71,96],              s:[66000,50000,85000,88000,73000,26000,34000,52000,55000,48000,79000,81000,110000] },
+    satelite: { o:[80,65,95,100,82,30,38,58,62,56,86,37,16],             s:[89000,72000,106000,110000,90000,32000,42000,64000,68000,60000,94000,39000,14000] },
+    turbo:    { o:[0,0,2,3,5,8,12,15,18,15,22,28,47],                    s:[0,0,1500,2500,4000,7000,11000,14000,17000,14000,20000,27000,42000] }
+  };
+  if (data[id]) storeTrendChart('c-' + id + '-trend', data[id].o, data[id].s);
+}
+
+// ── SUMMARY PAGE CHARTS ──
+window.addEventListener('load', () => {
+  const mn = months;
+
+  // Sales
+  const c1 = document.getElementById('chartSales');
+  if (c1) new Chart(c1, { type:'line', data:{ labels:mn, datasets:[{ label:'Venta Neta', data:[689338,615183,587257,708190,741209,804751,934630,955525,1129560,1056609,1101506,1276297,1091222], borderColor:'#FF6B35', backgroundColor:'rgba(255,107,53,0.12)', fill:true, tension:.3, pointRadius:4, pointBackgroundColor:'#FF6B35' }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false},tooltip:{callbacks:{label:v=>' $'+v.raw.toLocaleString()}}}, scales:{ y:{grid:{color:'rgba(255,68,31,0.07)'},ticks:{callback:v=>v>=1e6?'$'+(v/1e6).toFixed(1)+'M':'$'+(v/1000).toFixed(0)+'K'}}, x:{grid:{display:false}} } } });
+
+  // Orders
+  const c2 = document.getElementById('chartOrders');
+  if (c2) new Chart(c2, { type:'bar', data:{ labels:mn, datasets:[{ label:'Órdenes', data:[609,550,505,590,577,638,764,825,969,902,975,1224,985], backgroundColor:'rgba(255,68,31,0.55)', borderColor:'#FF441F', borderWidth:1, borderRadius:4, yAxisID:'y' },{ label:'Usuarios', data:[430,417,458,548,568,630,638,699,781,618,null,907,692], type:'line', borderColor:'#276EF1', backgroundColor:'rgba(45,109,166,0.08)', fill:true, tension:.3, pointRadius:3, yAxisID:'y1' }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',labels:{boxWidth:12,padding:14}}}, scales:{ y:{position:'left',grid:{color:'rgba(255,68,31,0.07)'},title:{display:true,text:'Órdenes',color:'#D9361E',font:{size:10}}}, y1:{position:'right',grid:{display:false},title:{display:true,text:'Usuarios',color:'#276EF1',font:{size:10}}}, x:{grid:{display:false}} } } });
+
+  // AOV
+  const c3 = document.getElementById('chartAOV');
+  if (c3) new Chart(c3, { type:'line', data:{ labels:mn, datasets:[{ label:'AOV', data:[1132,1111,1285,1043,1119,1158,1171,1200,1223,1166,1130,1163,1134], borderColor:'#FF441F', backgroundColor:'rgba(255,68,31,0.08)', fill:true, tension:.4, pointRadius:3 }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{display:false}}, scales:{ y:{grid:{color:'rgba(255,68,31,0.07)'},ticks:{callback:v=>'$'+v.toLocaleString()},min:900,max:1400}, x:{grid:{display:false}} } } });
+
+  // Conv
+  const c4 = document.getElementById('chartConv');
+  if (c4) new Chart(c4, { type:'line', data:{ labels:mn, datasets:[{ label:'Conversión', data:[10.5,12.4,8.2,12.4,9.7,9.2,10.5,9.2,10.6,11.0,10.9,9.7,10.5], borderColor:'#7C3AED', backgroundColor:'rgba(119,80,169,0.08)', fill:true, tension:.4, pointRadius:3 },{ label:'BM 12.7%', data:[12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7,12.7], borderColor:'rgba(255,68,31,0.25)', borderDash:[4,4], borderWidth:1.5, pointRadius:0, fill:false }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',labels:{boxWidth:10,padding:12,font:{size:10}}}}, scales:{ y:{grid:{color:'rgba(255,68,31,0.07)'},ticks:{callback:v=>v+'%'},min:6,max:14}, x:{grid:{display:false}} } } });
+
+  // Market Share
+  const c5 = document.getElementById('chartMS');
+  if (c5) new Chart(c5, { type:'line', data:{ labels:mn, datasets:[{ label:'Market Share', data:[1.8,2.6,3.2,1.6,2.2,2.5,2.6,1.7,1.8,2.1,2.5,1.7,1.8], borderColor:'#00A878', backgroundColor:'rgba(5,135,104,0.08)', fill:true, tension:.4, pointRadius:3 },{ label:'Target 2.5%', data:[2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5,2.5], borderColor:'rgba(255,68,31,0.22)', borderDash:[4,4], borderWidth:1.5, pointRadius:0, fill:false }] }, options:{ responsive:true, maintainAspectRatio:false, plugins:{legend:{position:'top',labels:{boxWidth:10,padding:12,font:{size:10}}}}, scales:{ y:{grid:{color:'rgba(255,68,31,0.07)'},ticks:{callback:v=>v+'%'},min:0,max:4}, x:{grid:{display:false}} } } });
+
+  chartsRendered['resumen'] = true;
+});
+</script>
+</body>
+</html>
